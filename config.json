@@ -1,0 +1,107 @@
+{
+  "heroImages": [
+    "images/image-1773045593230-708244274.jpg"
+  ],
+  "heroTitle": "WELCOME TO KKT HOMES",
+  "heroSubtitle": "We Build Your Dream House",
+  "heroBtnText": "Contact us",
+  "overviewImage": "",
+  "overviewTitle": "Overview",
+  "overviewText": "<strong>Quality</strong> craftsmanship ensures every project meets our high standards.",
+  "stats": [
+    {
+      "val": "15",
+      "lab": "year of experience"
+    },
+    {
+      "val": "155",
+      "lab": "Expert"
+    },
+    {
+      "val": "1556",
+      "lab": "Happy Customer"
+    },
+    {
+      "val": "188",
+      "lab": "House Build"
+    }
+  ],
+  "services": [
+    {
+      "img": "",
+      "title": "House Constructions",
+      "desc": "More section and home designs to suit your needs. Construction supervised by an experienced qualified team."
+    },
+    {
+      "img": "",
+      "title": "Building Constructions",
+      "desc": "We amongst the foremost well acknowledged construction firms in country, with a wealth of numerous expertise."
+    },
+    {
+      "img": "",
+      "title": "House Plan",
+      "desc": "Perhaps you have already selected a lot, but are having difficulty finding a house that fits?"
+    }
+  ],
+  "projects": [
+    {
+      "img": "",
+      "title": "The Zenith Villa",
+      "loc": "Colombo, Sri Lanka"
+    },
+    {
+      "img": "",
+      "title": "Lumina Residence",
+      "loc": "Kandy, Sri Lanka"
+    },
+    {
+      "img": "",
+      "title": "Azure Heights",
+      "loc": "Galle, Sri Lanka"
+    }
+  ],
+  "aboutPageHeroImage": "",
+  "aboutPageContentImage": "",
+  "aboutPageTitle": "Our Vision",
+  "aboutPageText": "At KKT Constructions, we believe in building more than just houses; we build dream homes.",
+  "servicesPage": {
+    "heroImg": "",
+    "heroTitle": "OUR SERVICES",
+    "heroSubtitle": "Quality Construction Solutions",
+    "headerTitle": "Expertise We Offer",
+    "extraServices": [
+      {
+        "icon": "fas fa-drafting-compass",
+        "title": "3D Modeling",
+        "desc": "Visualize your project before construction begins with our high-end 3D rendering and modeling services."
+      },
+      {
+        "icon": "fas fa-file-invoice-dollar",
+        "title": "BOQ Estimation",
+        "desc": "Transparent and accurate Bill of Quantities (BOQ) to help you manage your budget effectively without surprises."
+      },
+      {
+        "icon": "fas fa-hard-hat",
+        "title": "Site Supervision",
+        "desc": "Dedicated site supervisors to ensure the work progresses on schedule and adheres to the highest safety standards."
+      }
+    ]
+  },
+  "designs": [
+    {
+      "img": "",
+      "title": "Modern Villa",
+      "loc": "Colombo"
+    },
+    {
+      "img": "",
+      "title": "Luxury Apartment",
+      "loc": "Kandy"
+    },
+    {
+      "img": "",
+      "title": "Beach House",
+      "loc": "Galle"
+    }
+  ]
+}
