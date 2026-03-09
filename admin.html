@@ -10,6 +10,12 @@
 </head>
 
 <body class="admin-body">
+    <div id="live-warning"
+        style="display: none; background: #ff4444; color: white; text-align: center; padding: 1rem; position: sticky; top: 0; z-index: 9999; font-weight: bold;">
+        ⚠️ LIVE SITE MODE: You cannot upload images or save changes here. Please use the Admin Panel at
+        http://localhost:3000 to edit your site.
+    </div>
+
     <div id="login-container" class="admin-container">
         <form id="login-form" class="admin-card glass-card">
             <h2>Admin Login</h2>
@@ -351,6 +357,11 @@
 
         // Initial Load
         document.addEventListener('DOMContentLoaded', () => {
+            // Check if running on live site
+            if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+                document.getElementById('live-warning').style.display = 'block';
+            }
+
             if (sessionStorage.getItem('admin_logged_in') === 'true') {
                 showDashboard();
             }
@@ -591,7 +602,8 @@
                         loadingText.innerText = originalText;
                     } catch (err) {
                         console.error('Upload failed:', err);
-                        alert('Upload failed. Is the server running?');
+                        alert('Upload failed! Please make sure you are running "node server.js" on your computer.');
+                        loadingText.innerText = originalText;
                     }
                 }
             };
@@ -875,7 +887,7 @@
                 }
             } catch (e) {
                 console.error('Save failed:', e);
-                status.innerText = 'Error: Make sure "server.js" is running!';
+                status.innerText = 'Error: Make sure "server.js" is running on your computer!';
                 status.style.color = 'red';
 
                 // Fallback to localStorage only if server is down
