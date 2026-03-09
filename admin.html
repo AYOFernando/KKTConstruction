@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KKT Homes | Admin Panel</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body class="admin-body">
+    <div id="login-container" class="admin-container">
+        <form id="login-form" class="admin-card glass-card">
+            <h2>Admin Login</h2>
+            <div class="form-group">
+                <label>Username</label>
+                <input type="email" id="username" placeholder="kktconstruction@admin.com" required>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="password" placeholder="••••••••" required>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+            <p id="login-error" style="color: red; display: none; margin-top: 1rem;"></p>
+        </form>
+    </div>
+
+    <div id="dashboard-container" class="admin-container" style="display: none;">
+        <div class="admin-card glass-card dashboard-card">
+            <div class="dashboard-header">
+                <h2>Site Dashboard</h2>
+                <button id="logout-btn" class="btn btn-outline" style="padding: 0.5rem 1rem;">Logout</button>
+            </div>
+
+            <div class="admin-tabs">
+                <button class="tab-btn active" onclick="switchTab('home')">Home Page</button>
+                <button class="tab-btn" onclick="switchTab('services')">Services Page</button>
+                <button class="tab-btn" onclick="switchTab('about')">About Page</button>
+                <button class="tab-btn" onclick="switchTab('designs')">Designs Page</button>
+            </div>
+
+            <div id="home-mgmt-section">
+                <div class="dashboard-grid">
+                    <!-- Hero Section Management -->
+                    <div class="dashboard-section">
+                        <h3>Hero Section (Slideshow)</h3>
+                        <div class="form-group">
+                            <label>Number of Slideshow Images</label>
+                            <input type="number" id="hero-image-count" min="1" max="10" value="1"
+                                onchange="renderHeroUploadZones()">
+                        </div>
+                        <div id="hero-upload-container">
+                            <!-- Upload zones will be generated here -->
+                        </div>
+
+                        <div class="form-group" style="margin-top: 2rem;">
+                            <label>Hero Title</label>
+                            <input type="text" id="hero-title" placeholder="WELCOME TO KKT HOMES">
+                        </div>
+                        <div class="form-group">
+                            <label>Hero Subtitle</label>
+                            <input type="text" id="hero-subtitle" placeholder="We Build Your Dream House">
+                        </div>
+                        <div class="form-group">
+                            <label>Hero Button Text</label>
+                            <input type="text" id="hero-btn-text" placeholder="Contact us">
+                        </div>
+                    </div>
+
+                    <!-- Overview Section Management -->
+                    <div class="dashboard-section">
+                        <h3>Overview Section</h3>
+                        <div class="upload-group" style="margin-bottom: 2rem;">
+                            <label>Overview Image</label>
+                            <div class="upload-zone" id="overview-drop-zone">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>Drag & drop or Click to upload</p>
+                                <input type="file" id="overview-file-input" hidden accept="image/*">
+                            </div>
+                            <div id="overview-preview" class="preview-container">
+                                <img src="" alt="Overview Preview" class="preview-img">
+                                <button class="btn-delete-img" onclick="deleteImage('overview')"><i
+                                        class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Overview Title</label>
+                            <input type="text" id="overview-title" placeholder="Overview">
+                        </div>
+                        <div class="form-group">
+                            <label>Overview Content</label>
+                            <textarea id="overview-text" rows="4" placeholder="Craftsmanship ensures..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Stats Bar Management -->
+                    <div class="dashboard-section">
+                        <h3>Stats Bar</h3>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div class="form-group">
+                                <label>Stat 1 Value</label>
+                                <input type="text" id="stat-val-1" placeholder="15">
+                            </div>
+                            <div class="form-group">
+                                <label>Stat 1 Label</label>
+                                <input type="text" id="stat-lab-1" placeholder="year of experience">
+                            </div>
+                            <div class="form-group">
+                                <label>Stat 2 Value</label>
+                                <input type="text" id="stat-val-2" placeholder="155">
+                            </div>
+                            <div class="form-group">
+                                <label>Stat 2 Label</label>
+                                <input type="text" id="stat-lab-2" placeholder="Expert">
+                            </div>
+                            <div class="form-group">
+                                <label>Stat 3 Value</label>
+                                <input type="text" id="stat-val-3" placeholder="1556">
+                            </div>
+                            <div class="form-group">
+                                <label>Stat 3 Label</label>
+                                <input type="text" id="stat-lab-3" placeholder="Happy Customer">
+                            </div>
+                            <div class="form-group">
+                                <label>Stat 4 Value</label>
+                                <input type="text" id="stat-val-4" placeholder="188">
+                            </div>
+                            <div class="form-group">
+                                <label>Stat 4 Label</label>
+                                <input type="text" id="stat-lab-4" placeholder="House Build">
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <!-- Services Section Management (Shared) -->
+                    <div class="dashboard-section">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <h3>Main Services (Home & Services Grid)</h3>
+                            <button class="btn btn-outline" onclick="addMainService()" style="padding: 0.5rem 1rem;">
+                                <i class="fas fa-plus" style="margin-right: 5px;"></i> Add Service
+                            </button>
+                        </div>
+                        <div class="form-group">
+                            <label>Services Section Header (Optional)</label>
+                            <input type="text" id="services-header-title-input" placeholder="Expertise We Offer">
+                        </div>
+
+                        <div id="main-services-management-container" style="margin-top: 2rem;">
+                            <!-- Services will be generated here -->
+                        </div>
+                    </div>
+
+                    <!-- Projects Management -->
+                    <div class="dashboard-section">
+                        <h3>Projects</h3>
+
+                        <div class="form-group">
+                            <label>Number of Projects</label>
+                            <input type="number" id="project-count" min="3" max="10" value="3"
+                                onchange="renderProjectUploadZones()">
+                        </div>
+                        <div id="project-upload-container">
+                            <!-- Project upload zones will be generated here -->
+                        </div>
+                    </div>
+                </div> <!-- End of dashboard-grid -->
+            </div> <!-- End of home-mgmt-section -->
+
+            <div id="services-mgmt-section" style="display: none;">
+                <div class="dashboard-grid">
+                    <!-- Services Hero Section -->
+                    <div class="dashboard-section">
+                        <h3>Services Hero Section</h3>
+                        <div class="upload-group" style="margin-bottom: 2rem;">
+                            <label>Hero Image (Services Page)</label>
+                            <div class="upload-zone" id="services-hero-drop-zone">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>Drag & drop or Click to upload</p>
+                                <input type="file" id="services-hero-file-input" hidden accept="image/*">
+                            </div>
+                            <div id="services-hero-preview" class="preview-container">
+                                <img src="" alt="Services Hero Preview" class="preview-img">
+                                <button class="btn-delete-img" onclick="deleteImage('services-hero')"><i
+                                        class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Hero Title</label>
+                            <input type="text" id="services-hero-title" placeholder="OUR SERVICES">
+                        </div>
+                        <div class="form-group">
+                            <label>Hero Subtitle</label>
+                            <input type="text" id="services-hero-subtitle" placeholder="Quality Construction Solutions">
+                        </div>
+                    </div>
+
+                    <!-- Additional Services Section -->
+                    <div class="dashboard-section">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                            <h3>Additional Services (Extra Cards)</h3>
+                            <button class="btn btn-outline" onclick="addExtraService()" style="padding: 0.5rem 1rem;">
+                                <i class="fas fa-plus" style="margin-right: 5px;"></i> Add Extra Service
+                            </button>
+                        </div>
+                        <div id="extra-services-container">
+                            <!-- Extra services will be generated here -->
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- End of services-mgmt-section -->
+
+            <div id="about-mgmt-section" style="display: none;">
+                <div class="dashboard-grid">
+                    <div class="dashboard-section">
+                        <h3>About Page Hero</h3>
+                        <div class="upload-group" style="margin-bottom: 2rem;">
+                            <label>Hero Image (About Page)</label>
+                            <div class="upload-zone" id="about-hero-drop-zone">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>Drag & drop or Click to upload</p>
+                                <input type="file" id="about-hero-file-input" hidden accept="image/*">
+                            </div>
+                            <div id="about-hero-preview" class="preview-container">
+                                <img src="" alt="About Hero Preview" class="preview-img">
+                                <button class="btn-delete-img" onclick="deleteImage('about-hero')"><i
+                                        class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-section">
+                        <h3>About Vision Section</h3>
+                        <div class="upload-group" style="margin-bottom: 2rem;">
+                            <label>Vision Content Image</label>
+                            <div class="upload-zone" id="about-content-drop-zone">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>Drag & drop or Click to upload</p>
+                                <input type="file" id="about-content-file-input" hidden accept="image/*">
+                            </div>
+                            <div id="about-content-preview" class="preview-container">
+                                <img src="" alt="About Content Preview" class="preview-img">
+                                <button class="btn-delete-img" onclick="deleteImage('about-content')"><i
+                                        class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Vision Title</label>
+                            <input type="text" id="about-vision-title" placeholder="Our Vision">
+                        </div>
+                        <div class="form-group">
+                            <label>Vision Text</label>
+                            <textarea id="about-vision-text" rows="4" placeholder="At KKT Constructions..."></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- End of about-mgmt-section -->
+
+            <div id="designs-mgmt-section" style="display: none;">
+                <div class="dashboard-grid">
+                    <div class="dashboard-section">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                            <h3>Designs Content</h3>
+                            <button class="btn btn-outline" onclick="addDesignEntry()" style="padding: 0.5rem 1rem;">
+                                <i class="fas fa-plus" style="margin-right: 5px;"></i> Add New Design
+                            </button>
+                        </div>
+                        <div id="design-upload-container">
+                            <!-- Design upload cards will be generated here -->
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- End of designs-mgmt-section -->
+
+        </div> <!-- End of dashboard-card -->
+
+        <div class="admin-sticky-footer">
+            <div class="container"
+                style="max-width: 900px; display: flex; flex-direction: column; align-items: center;">
+                <button id="save-btn" class="btn btn-primary"
+                    style="width: 100%; padding: 1rem; font-size: 1.1rem;">Save
+                    Changes</button>
+                <p id="save-status" style="color: #00ff00; display: none; margin-top: 0.5rem; text-align: center;"></p>
+            </div>
+        </div>
+    </div> <!-- End of dashboard-container -->
+
+
+
+    <script>
+        const loginForm = document.getElementById('login-form');
+        const loginContainer = document.getElementById('login-container');
+        const dashboardContainer = document.getElementById('dashboard-container');
+        const logoutBtn = document.getElementById('logout-btn');
+        const saveBtn = document.getElementById('save-btn');
+
+        let siteConfig = {
+            heroImages: [],
+            heroTitle: 'WELCOME TO KKT HOMES',
+            heroSubtitle: 'We Build Your Dream House',
+            heroBtnText: 'Contact us',
+            overviewImage: '',
+            overviewTitle: 'Overview',
+            overviewText: '<strong>Quality</strong> craftsmanship ensures every project meets our high standards.',
+            stats: [
+                { val: '15', lab: 'year of experience' },
+                { val: '155', lab: 'Expert' },
+                { val: '1556', lab: 'Happy Customer' },
+                { val: '188', lab: 'House Build' }
+            ],
+            services: [
+                { img: '', title: 'House Constructions', desc: 'More section and home designs to suit your needs. Construction supervised by an experienced qualified team.' },
+                { img: '', title: 'Building Constructions', desc: 'We amongst the foremost well acknowledged construction firms in country, with a wealth of numerous expertise.' },
+                { img: '', title: 'House Plan', desc: 'Perhaps you have already selected a lot, but are having difficulty finding a house that fits?' }
+            ],
+            projects: [
+                { img: '', title: 'The Zenith Villa', loc: 'Colombo, Sri Lanka' },
+                { img: '', title: 'Lumina Residence', loc: 'Kandy, Sri Lanka' },
+                { img: '', title: 'Azure Heights', loc: 'Galle, Sri Lanka' }
+            ],
+            aboutPageHeroImage: '',
+            aboutPageContentImage: '',
+            aboutPageTitle: 'Our Vision',
+            aboutPageText: 'At KKT Constructions, we believe in building more than just houses; we build dream homes.',
+            servicesPage: {
+                heroImg: '',
+                heroTitle: 'OUR SERVICES',
+                heroSubtitle: 'Quality Construction Solutions',
+                headerTitle: 'Expertise We Offer',
+                extraServices: [
+                    { icon: 'fas fa-drafting-compass', title: '3D Modeling', desc: 'Visualize your project before construction begins with our high-end 3D rendering and modeling services.' },
+                    { icon: 'fas fa-file-invoice-dollar', title: 'BOQ Estimation', desc: 'Transparent and accurate Bill of Quantities (BOQ) to help you manage your budget effectively without surprises.' },
+                    { icon: 'fas fa-hard-hat', title: 'Site Supervision', desc: 'Dedicated site supervisors to ensure the work progresses on schedule and adheres to the highest safety standards.' }
+                ]
+            },
+            designs: [
+                { img: '', title: 'Modern Villa', loc: 'Colombo' },
+                { img: '', title: 'Luxury Apartment', loc: 'Kandy' },
+                { img: '', title: 'Beach House', loc: 'Galle' }
+            ]
+        };
+
+        // Credentials
+        const ADMIN_USER = 'kktconstruction@admin.com';
+        const ADMIN_PASS = 'KkT#5467328910';
+
+        // Initial Load
+        document.addEventListener('DOMContentLoaded', () => {
+            if (sessionStorage.getItem('admin_logged_in') === 'true') {
+                showDashboard();
+            }
+        });
+
+        function renderHeroUploadZones() {
+            const count = parseInt(document.getElementById('hero-image-count').value) || 1;
+            const container = document.getElementById('hero-upload-container');
+            container.innerHTML = '';
+
+            // Adjust heroImages array size
+            while (siteConfig.heroImages.length > count) {
+                siteConfig.heroImages.pop();
+            }
+            while (siteConfig.heroImages.length < count) {
+                siteConfig.heroImages.push('');
+            }
+
+            for (let i = 0; i < count; i++) {
+                const group = document.createElement('div');
+                group.className = 'upload-group';
+                group.style.marginBottom = '1.5rem';
+                group.innerHTML = `
+                    <label>Slide Image ${i + 1}</label>
+                    <div class="upload-zone" id="hero-drop-zone-${i}" onclick="document.getElementById('hero-file-input-${i}').click()">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Drag & drop or Click to upload</p>
+                        <input type="file" id="hero-file-input-${i}" hidden accept="image/*" onchange="handleHeroFileSelection(this.files[0], ${i})">
+                    </div>
+                    <div id="hero-preview-${i}" class="preview-container" style="${siteConfig.heroImages[i] ? 'display:block' : 'display:none'}">
+                        <img src="${siteConfig.heroImages[i] || ''}" alt="Hero Preview ${i}" class="preview-img">
+                        <button class="btn-delete-img" onclick="deleteHeroImage(${i})"><i class="fas fa-trash"></i></button>
+                    </div>
+                `;
+
+                // Set up drag and drop for this zone
+                const dropZone = group.querySelector(`#hero-drop-zone-${i}`);
+                if (siteConfig.heroImages[i]) dropZone.style.display = 'none';
+
+                dropZone.ondragover = (e) => {
+                    e.preventDefault();
+                    dropZone.classList.add('dragover');
+                };
+                dropZone.ondragleave = () => dropZone.classList.remove('dragover');
+                dropZone.ondrop = (e) => {
+                    e.preventDefault();
+                    dropZone.classList.remove('dragover');
+                    if (e.dataTransfer.files.length) {
+                        handleHeroFileSelection(e.dataTransfer.files[0], i);
+                    }
+                };
+
+                container.appendChild(group);
+            }
+        }
+
+        function renderProjectUploadZones() {
+            const count = parseInt(document.getElementById('project-count').value) || 3;
+            const container = document.getElementById('project-upload-container');
+            container.innerHTML = '';
+
+            // Adjust projects array size
+            while (siteConfig.projects.length > count) siteConfig.projects.pop();
+            while (siteConfig.projects.length < count) siteConfig.projects.push({ img: '', title: '', loc: '' });
+
+            for (let i = 0; i < count; i++) {
+                const group = document.createElement('div');
+                group.className = 'upload-group';
+                group.style.marginBottom = '2rem';
+                group.style.paddingBottom = '1rem';
+                group.style.borderBottom = '1px solid #eee';
+
+                const proj = siteConfig.projects[i];
+
+                group.innerHTML = `
+                        <h4>Project ${i + 1}</h4>
+                        <div class="upload-zone" id="project-drop-zone-${i}" onclick="document.getElementById('project-file-input-${i}').click()">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>Drag & drop or Click to upload</p>
+                            <input type="file" id="project-file-input-${i}" hidden accept="image/*" onchange="handleProjectFileSelection(this.files[0], ${i})">
+                        </div>
+                        <div id="project-preview-${i}" class="preview-container" style="${proj.img ? 'display:block' : 'display:none'}">
+                            <img src="${proj.img || ''}" alt="Project Preview ${i}" class="preview-img">
+                            <button class="btn-delete-img" onclick="deleteProjectImage(${i})"><i class="fas fa-trash"></i></button>
+                        </div>
+                        <div class="form-group" style="margin-top:1rem;">
+                            <label>Project Title</label>
+                            <input type="text" id="project-title-${i}" value="${proj.title || ''}" placeholder="Project Title">
+                        </div>
+                        <div class="form-group">
+                            <label>Location</label>
+                            <input type="text" id="project-loc-${i}" value="${proj.loc || ''}" placeholder="Colombo, Sri Lanka">
+                        </div>
+                    `;
+
+                const dropZone = group.querySelector(`#project-drop-zone-${i}`);
+                if (proj.img) dropZone.style.display = 'none';
+
+                dropZone.ondragover = (e) => { e.preventDefault(); dropZone.classList.add('dragover'); };
+                dropZone.ondragleave = () => dropZone.classList.remove('dragover');
+                dropZone.ondrop = (e) => {
+                    e.preventDefault();
+                    dropZone.classList.remove('dragover');
+                    if (e.dataTransfer.files.length) handleProjectFileSelection(e.dataTransfer.files[0], i);
+                };
+
+                container.appendChild(group);
+            }
+        }
+
+        function addDesignEntry() {
+            siteConfig.designs = siteConfig.designs || [];
+            siteConfig.designs.push({ img: '', title: '', loc: '' });
+            renderDesignUploadZones();
+        }
+
+        function removeDesignEntry(index) {
+            if (confirm('Are you sure you want to delete this design?')) {
+                siteConfig.designs.splice(index, 1);
+                renderDesignUploadZones();
+            }
+        }
+
+        function renderDesignUploadZones() {
+            const container = document.getElementById('design-upload-container');
+            if (!container) return;
+            container.innerHTML = '';
+
+            const designs = siteConfig.designs || [];
+
+            if (designs.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: #888; padding: 2rem;">No designs added yet. Click "Add New Design" to start.</p>';
+                return;
+            }
+
+            designs.forEach((design, i) => {
+                const group = document.createElement('div');
+                group.className = 'upload-group';
+                group.style.marginBottom = '2rem';
+                group.style.padding = '1.5rem';
+                group.style.border = '1px solid #eee';
+                group.style.borderRadius = '8px';
+                group.style.background = '#fff';
+
+                group.innerHTML = `
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                            <h4 style="margin:0;">Design Entry ${i + 1}</h4>
+                            <button class="btn-delete-img" onclick="removeDesignEntry(${i})" title="Delete Design" style="position: static; width: auto; height: auto; padding: 0.5rem; border-radius: 4px;">
+                                <i class="fas fa-trash-alt"></i> Delete Entry
+                            </button>
+                        </div>
+
+                        <div class="upload-zone" id="design-drop-zone-${i}" onclick="document.getElementById('design-file-input-${i}').click()">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>Drag & drop or Click to upload</p>
+                            <input type="file" id="design-file-input-${i}" hidden accept="image/*" onchange="handleDesignFileSelection(this.files[0], ${i})">
+                        </div>
+                        <div id="design-preview-${i}" class="preview-container" style="${design.img ? 'display:block' : 'display:none'}">
+                            <img src="${design.img || ''}" alt="Design Preview ${i}" class="preview-img">
+                            <button class="btn-delete-img" onclick="deleteDesignImage(${i})"><i class="fas fa-trash"></i></button>
+                        </div>
+                        <div class="form-group" style="margin-top:1rem;">
+                            <label>Design Title</label>
+                            <input type="text" id="design-title-${i}" value="${design.title || ''}" placeholder="Design Title" oninput="updateDesignData(${i}, 'title', this.value)">
+                        </div>
+                        <div class="form-group">
+                            <label>Location (Optional)</label>
+                            <input type="text" id="design-loc-${i}" value="${design.loc || ''}" placeholder="Colombo, Sri Lanka" oninput="updateDesignData(${i}, 'loc', this.value)">
+                        </div>
+                    `;
+
+                const dropZone = group.querySelector(`#design-drop-zone-${i}`);
+                if (design.img) dropZone.style.display = 'none';
+
+                dropZone.ondragover = (e) => { e.preventDefault(); dropZone.classList.add('dragover'); };
+                dropZone.ondragleave = () => dropZone.classList.remove('dragover');
+                dropZone.ondrop = (e) => {
+                    e.preventDefault();
+                    dropZone.classList.remove('dragover');
+                    if (e.dataTransfer.files.length) handleDesignFileSelection(e.dataTransfer.files[0], i);
+                };
+
+                container.appendChild(group);
+            });
+        }
+
+        function updateDesignData(index, field, value) {
+            if (siteConfig.designs[index]) {
+                siteConfig.designs[index][field] = value;
+            }
+        }
+
+        function setupOverviewUpload() {
+            // Home Overview
+            setupGenericUpload('overview-drop-zone', 'overview-file-input', (img) => {
+                siteConfig.overviewImage = img;
+                updateOverviewPreview(img);
+            });
+
+            // About Hero
+            setupGenericUpload('about-hero-drop-zone', 'about-hero-file-input', (img) => {
+                siteConfig.aboutPageHeroImage = img;
+                updateAboutHeroPreview(img);
+            });
+
+            // About Content
+            setupGenericUpload('about-content-drop-zone', 'about-content-file-input', (img) => {
+                siteConfig.aboutPageContentImage = img;
+                updateAboutContentPreview(img);
+            });
+
+            // Services Hero
+            setupGenericUpload('services-hero-drop-zone', 'services-hero-file-input', (img) => {
+                siteConfig.servicesPage = siteConfig.servicesPage || {};
+                siteConfig.servicesPage.heroImg = img;
+                updateServicesHeroPreview(img);
+            });
+        }
+
+        function setupGenericUpload(zoneId, inputId, callback) {
+            const dropZone = document.getElementById(zoneId);
+            const input = document.getElementById(inputId);
+            if (!dropZone || !input) return;
+
+            dropZone.onclick = () => input.click();
+            input.onchange = (e) => {
+                const file = e.target.files[0];
+                if (file && file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => callback(e.target.result);
+                    reader.readAsDataURL(file);
+                }
+            };
+
+            dropZone.ondragover = (e) => {
+                e.preventDefault();
+                dropZone.classList.add('dragover');
+            };
+            dropZone.ondragleave = () => dropZone.classList.remove('dragover');
+            dropZone.ondrop = (e) => {
+                e.preventDefault();
+                dropZone.classList.remove('dragover');
+                if (e.dataTransfer.files.length) {
+                    const file = e.dataTransfer.files[0];
+                    if (file && file.type.startsWith('image/')) {
+                        const reader = new FileReader();
+                        reader.onload = (e) => callback(e.target.result);
+                        reader.readAsDataURL(file);
+                    }
+                }
+            };
+        }
+
+        function handleHeroFileSelection(file, index) {
+            if (!file || !file.type.startsWith('image/')) return;
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                siteConfig.heroImages[index] = e.target.result;
+                updateHeroPreview(index, e.target.result);
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function handleProjectFileSelection(file, index) {
+            if (!file || !file.type.startsWith('image/')) return;
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                siteConfig.projects[index].img = e.target.result;
+                updateProjectPreview(index, e.target.result);
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function handleDesignFileSelection(file, index) {
+            if (!file || !file.type.startsWith('image/')) return;
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                siteConfig.designs[index].img = e.target.result;
+                updateDesignPreview(index, e.target.result);
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function handleOverviewFileSelection(file) {
+            if (!file || !file.type.startsWith('image/')) return;
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                siteConfig.overviewImage = e.target.result;
+                updateOverviewPreview(e.target.result);
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function updateProjectPreview(index, data) {
+            const container = document.getElementById(`project-preview-${index}`);
+            const img = container.querySelector('img');
+            const dropZone = document.getElementById(`project-drop-zone-${index}`);
+
+            if (data) {
+                img.src = data;
+                container.style.display = 'block';
+                dropZone.style.display = 'none';
+            } else {
+                container.style.display = 'none';
+                dropZone.style.display = 'flex';
+            }
+        }
+
+        function updateDesignPreview(index, data) {
+            const container = document.getElementById(`design-preview-${index}`);
+            const img = container.querySelector('img');
+            const dropZone = document.getElementById(`design-drop-zone-${index}`);
+
+            if (data) {
+                img.src = data;
+                container.style.display = 'block';
+                dropZone.style.display = 'none';
+            } else {
+                container.style.display = 'none';
+                dropZone.style.display = 'flex';
+            }
+        }
+
+        function updateHeroPreview(index, data) {
+            const container = document.getElementById(`hero-preview-${index}`);
+            const img = container.querySelector('img');
+            const dropZone = document.getElementById(`hero-drop-zone-${index}`);
+
+            if (data) {
+                img.src = data;
+                container.style.display = 'block';
+                dropZone.style.display = 'none';
+            } else {
+                container.style.display = 'none';
+                dropZone.style.display = 'flex';
+            }
+        }
+
+        function updateOverviewPreview(data) {
+            genericPreviewUpdate('overview-preview', 'overview-drop-zone', data);
+        }
+
+        function updateAboutHeroPreview(data) {
+            genericPreviewUpdate('about-hero-preview', 'about-hero-drop-zone', data);
+        }
+
+        function updateAboutContentPreview(data) {
+            genericPreviewUpdate('about-content-preview', 'about-content-drop-zone', data);
+        }
+
+        function genericPreviewUpdate(previewId, zoneId, data) {
+            const container = document.getElementById(previewId);
+            if (!container) return; // Guard clause
+            const img = container.querySelector('img');
+            const dropZone = document.getElementById(zoneId);
+
+            if (data) {
+                img.src = data;
+                container.style.display = 'block';
+                dropZone.style.display = 'none';
+            } else {
+                container.style.display = 'none';
+                dropZone.style.display = 'flex';
+            }
+        }
+
+        function updateServicesHeroPreview(data) {
+            genericPreviewUpdate('services-hero-preview', 'services-hero-drop-zone', data);
+        }
+
+        window.deleteHeroImage = (index) => {
+            siteConfig.heroImages[index] = '';
+            updateHeroPreview(index, '');
+        };
+
+        window.deleteImage = (type) => {
+            if (type === 'overview') {
+                siteConfig.overviewImage = '';
+                updateOverviewPreview('');
+            } else if (type === 'about-hero') {
+                siteConfig.aboutPageHeroImage = '';
+                updateAboutHeroPreview('');
+            } else if (type === 'about-content') {
+                siteConfig.aboutPageContentImage = '';
+                updateAboutContentPreview('');
+            } else if (type === 'services-hero') {
+                siteConfig.servicesPage.heroImg = '';
+                updateServicesHeroPreview('');
+            }
+        };
+
+        window.deleteProjectImage = (index) => {
+            siteConfig.projects[index].img = '';
+            updateProjectPreview(index, '');
+        };
+
+        window.deleteDesignImage = (index) => {
+            siteConfig.designs[index].img = '';
+            updateDesignPreview(index, '');
+        };
+
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const user = document.getElementById('username').value;
+            const pass = document.getElementById('password').value;
+            const error = document.getElementById('login-error');
+
+            if (user === ADMIN_USER && pass === ADMIN_PASS) {
+                sessionStorage.setItem('admin_logged_in', 'true');
+                showDashboard();
+            } else {
+                error.innerText = 'Invalid credentials. Please try again.';
+                error.style.display = 'block';
+            }
+        });
+
+        logoutBtn.addEventListener('click', () => {
+            sessionStorage.removeItem('admin_logged_in');
+            window.location.reload();
+        });
+
+        saveBtn.addEventListener('click', () => {
+            siteConfig.heroTitle = document.getElementById('hero-title').value;
+            siteConfig.heroSubtitle = document.getElementById('hero-subtitle').value;
+            siteConfig.heroBtnText = document.getElementById('hero-btn-text').value;
+            siteConfig.overviewTitle = document.getElementById('overview-title').value;
+            siteConfig.overviewText = document.getElementById('overview-text').value;
+
+            // About Page
+            siteConfig.aboutPageTitle = document.getElementById('about-vision-title').value;
+            siteConfig.aboutPageText = document.getElementById('about-vision-text').value;
+
+            // Services Page Hero and Header
+            siteConfig.servicesPage = siteConfig.servicesPage || {};
+            siteConfig.servicesPage.heroTitle = document.getElementById('services-hero-title').value;
+            siteConfig.servicesPage.heroSubtitle = document.getElementById('services-hero-subtitle').value;
+            siteConfig.servicesPage.headerTitle = document.getElementById('services-header-title-input').value;
+
+            // Save Stats
+            siteConfig.stats = [];
+            for (let i = 1; i <= 4; i++) {
+                siteConfig.stats.push({
+                    val: document.getElementById(`stat-val-${i}`).value,
+                    lab: document.getElementById(`stat-lab-${i}`).value
+                });
+            }
+
+            // Save Services
+            siteConfig.services = siteConfig.services || [];
+            // Save Main Services
+            const mainServiceContainers = document.querySelectorAll('#main-services-management-container > div');
+            siteConfig.services = siteConfig.services || [];
+            const newServices = [];
+            mainServiceContainers.forEach((container, i) => {
+                const title = document.getElementById(`main-service-title-${i}`)?.value || '';
+                const desc = document.getElementById(`main-service-desc-${i}`)?.value || '';
+                // img is already in siteConfig.services[i].img via file handler
+                newServices.push({
+                    img: siteConfig.services[i]?.img || '',
+                    title: title,
+                    desc: desc
+                });
+            });
+            siteConfig.services = newServices;
+
+            // Save Extra Services
+            const extraServiceContainers = document.querySelectorAll('#extra-services-container > div');
+            siteConfig.servicesPage.extraServices = [];
+            extraServiceContainers.forEach((container, i) => {
+                const icon = document.getElementById(`extra-service-icon-${i}`)?.value || '';
+                const title = document.getElementById(`extra-service-title-${i}`)?.value || '';
+                const desc = document.getElementById(`extra-service-desc-${i}`)?.value || '';
+                siteConfig.servicesPage.extraServices.push({ icon, title, desc });
+            });
+
+            // Save Projects
+            const projCount = parseInt(document.getElementById('project-count').value);
+            siteConfig.projects = siteConfig.projects || [];
+            for (let i = 0; i < projCount; i++) {
+                if (!siteConfig.projects[i]) siteConfig.projects[i] = {};
+                siteConfig.projects[i].title = document.getElementById(`project-title-${i}`).value;
+                siteConfig.projects[i].loc = document.getElementById(`project-loc-${i}`).value;
+            }
+
+            // Designs are updated in real-time via oninput
+
+            const status = document.getElementById('save-status');
+            try {
+                localStorage.setItem('kkt_site_config', JSON.stringify(siteConfig));
+                status.innerText = 'successfully saved';
+                status.style.color = '#00ff00';
+            } catch (e) {
+                console.error('Save failed:', e);
+                if (e.name === 'QuotaExceededError') {
+                    status.innerText = 'Error: Images are too large! Please use smaller images.';
+                } else {
+                    status.innerText = 'Error saving changes. Please try again.';
+                }
+                status.style.color = 'red';
+            }
+
+            status.style.display = 'block';
+            setTimeout(() => status.style.display = 'none', 5000);
+        });
+
+        function renderMainServices() {
+            const container = document.getElementById('main-services-management-container');
+            if (!container) return;
+            container.innerHTML = '';
+            siteConfig.services = siteConfig.services || [];
+
+            siteConfig.services.forEach((service, i) => {
+                const div = document.createElement('div');
+                div.style.borderBottom = '1px solid #eee';
+                div.style.marginBottom = '2rem';
+                div.style.paddingBottom = '1rem';
+                div.innerHTML = `
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <h4>Main Service ${i + 1}</h4>
+                        <button class="btn-delete-img" onclick="deleteMainService(${i})" style="position: static; width: auto; height: auto; padding: 5px 10px; border-radius: 4px;">
+                            <i class="fas fa-trash"></i> Delete
+                        </button>
+                    </div>
+                    <div class="upload-group" style="margin-bottom: 1rem;">
+                        <label>Service Image</label>
+                        <div class="upload-zone" id="main-service-drop-zone-${i}" onclick="document.getElementById('main-service-file-input-${i}').click()" style="${service.img ? 'display:none' : 'display:flex'}">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>Drag & drop or Click to upload</p>
+                            <input type="file" id="main-service-file-input-${i}" hidden accept="image/*" onchange="handleMainServiceFile(${i}, this.files[0])">
+                        </div>
+                        <div id="main-service-preview-${i}" class="preview-container" style="${service.img ? 'display:block' : 'display:none'}">
+                            <img src="${service.img}" alt="Service ${i + 1} Preview" class="preview-img">
+                            <button class="btn-delete-img" onclick="removeMainServiceImage(${i})"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" id="main-service-title-${i}" value="${service.title || ''}" placeholder="Service Title">
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea id="main-service-desc-${i}" rows="3" placeholder="Service Description">${service.desc || ''}</textarea>
+                    </div>
+                `;
+                container.appendChild(div);
+
+                // Setup drag and drop
+                const zone = div.querySelector(`#main-service-drop-zone-${i}`);
+                if (zone) {
+                    zone.ondragover = (e) => { e.preventDefault(); zone.classList.add('dragover'); };
+                    zone.ondragleave = () => zone.classList.remove('dragover');
+                    zone.ondrop = (e) => {
+                        e.preventDefault();
+                        zone.classList.remove('dragover');
+                        if (e.dataTransfer.files.length) handleMainServiceFile(i, e.dataTransfer.files[0]);
+                    };
+                }
+            });
+        }
+
+        function addMainService() {
+            siteConfig.services = siteConfig.services || [];
+            siteConfig.services.push({ img: '', title: '', desc: '' });
+            renderMainServices();
+        }
+
+        function deleteMainService(index) {
+            if (confirm('Delete this service?')) {
+                siteConfig.services.splice(index, 1);
+                renderMainServices();
+            }
+        }
+
+        function handleMainServiceFile(index, file) {
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                siteConfig.services[index].img = e.target.result;
+                renderMainServices();
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function removeMainServiceImage(index) {
+            siteConfig.services[index].img = '';
+            renderMainServices();
+        }
+
+        function renderExtraServices() {
+            const container = document.getElementById('extra-services-container');
+            container.innerHTML = '';
+            siteConfig.servicesPage = siteConfig.servicesPage || { extraServices: [] };
+            siteConfig.servicesPage.extraServices = siteConfig.servicesPage.extraServices || [];
+
+            siteConfig.servicesPage.extraServices.forEach((extra, i) => {
+                const div = document.createElement('div');
+                div.style.borderBottom = '1px solid #eee';
+                div.style.marginBottom = '2rem';
+                div.style.paddingBottom = '1rem';
+                div.innerHTML = `
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <h4>Extra Service ${i + 1}</h4>
+                        <button class="btn-delete-img" onclick="deleteExtraService(${i})" style="position: static; width: auto; height: auto; padding: 5px 10px; border-radius: 4px;">
+                            <i class="fas fa-trash"></i> Delete
+                        </button>
+                    </div>
+                    <div class="form-group">
+                        <label>Icon Class (FontAwesome)</label>
+                        <input type="text" id="extra-service-icon-${i}" value="${extra.icon || ''}" placeholder="fas fa-drafting-compass">
+                    </div>
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" id="extra-service-title-${i}" value="${extra.title || ''}" placeholder="Service Title">
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea id="extra-service-desc-${i}" rows="3" placeholder="Service Description">${extra.desc || ''}</textarea>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function addExtraService() {
+            siteConfig.servicesPage = siteConfig.servicesPage || { extraServices: [] };
+            siteConfig.servicesPage.extraServices.push({ icon: 'fas fa-star', title: '', desc: '' });
+            renderExtraServices();
+        }
+
+        function deleteExtraService(index) {
+            if (confirm('Delete this extra service?')) {
+                siteConfig.servicesPage.extraServices.splice(index, 1);
+                renderExtraServices();
+            }
+        }
+
+        function showDashboard() {
+            loginContainer.style.display = 'none';
+            dashboardContainer.style.display = 'flex';
+
+            const savedConfig = JSON.parse(localStorage.getItem('kkt_site_config'));
+            if (savedConfig) {
+                siteConfig = savedConfig;
+            }
+
+            // Comprehensive initialization of heroImages
+            if (!siteConfig.heroImages || !Array.isArray(siteConfig.heroImages)) {
+                siteConfig.heroImages = siteConfig.heroImage ? [siteConfig.heroImage] : [];
+            }
+
+            // Clean up old property to save space
+            delete siteConfig.heroImage;
+
+            // Ensure projects array exists
+            if (!siteConfig.projects || !Array.isArray(siteConfig.projects)) {
+                siteConfig.projects = [
+                    { img: '', title: 'The Zenith Villa', loc: 'Colombo, Sri Lanka' },
+                    { img: '', title: 'Lumina Residence', loc: 'Kandy, Sri Lanka' },
+                    { img: '', title: 'Azure Heights', loc: 'Galle, Sri Lanka' }
+                ];
+            }
+
+            // Ensure designs array exists
+            if (!siteConfig.designs || !Array.isArray(siteConfig.designs)) {
+                siteConfig.designs = [
+                    { img: '', title: 'Modern Villa', loc: 'Colombo' },
+                    { img: '', title: 'Luxury Apartment', loc: 'Kandy' },
+                    { img: '', title: 'Beach House', loc: 'Galle' }
+                ];
+            }
+
+            // Ensure services array exists
+            if (!siteConfig.services || !Array.isArray(siteConfig.services)) {
+                siteConfig.services = [
+                    { img: '', title: 'House Constructions', desc: 'Quality craftsmanship for your dream home.' },
+                    { img: '', title: 'Building Constructions', desc: 'Expert solutions for commercial projects.' },
+                    { img: '', title: 'House Plan', desc: 'Professional architectural designs.' }
+                ];
+            }
+
+            renderDashboard();
+            setupOverviewUpload();
+            // setupServiceUploads(); // Removed, merged into renderHomeServices
+
+            // Re-bind global functions to ensure they are available to HTML event handlers
+            window.handleProjectFileSelection = handleProjectFileSelection;
+            window.handleHeroFileSelection = handleHeroFileSelection;
+            window.handleOverviewFileSelection = handleOverviewFileSelection;
+            window.renderProjectUploadZones = renderProjectUploadZones;
+            window.renderHeroUploadZones = renderHeroUploadZones;
+            window.renderDesignUploadZones = renderDesignUploadZones;
+            window.handleDesignFileSelection = handleDesignFileSelection;
+            window.addDesignEntry = addDesignEntry;
+            window.removeDesignEntry = removeDesignEntry;
+            window.updateDesignData = updateDesignData;
+            window.switchTab = switchTab;
+            window.addMainService = addMainService;
+            window.deleteMainService = deleteMainService;
+            window.handleMainServiceFile = handleMainServiceFile;
+            window.removeMainServiceImage = removeMainServiceImage;
+            window.addExtraService = addExtraService;
+            window.deleteExtraService = deleteExtraService;
+        }
+
+        function switchTab(tab) {
+            const sections = [
+                'home-mgmt-section',
+                'about-mgmt-section',
+                'services-mgmt-section',
+                'designs-mgmt-section'
+            ];
+
+            sections.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.style.display = 'none';
+            });
+
+            const tabs = document.querySelectorAll('.tab-btn');
+            tabs.forEach(t => t.classList.remove('active'));
+
+            if (tab === 'home') {
+                document.getElementById('home-mgmt-section').style.display = 'block';
+                tabs[0].classList.add('active');
+            } else if (tab === 'services') {
+                document.getElementById('services-mgmt-section').style.display = 'block';
+                tabs[1].classList.add('active');
+            } else if (tab === 'about') {
+                document.getElementById('about-mgmt-section').style.display = 'block';
+                tabs[2].classList.add('active');
+            } else if (tab === 'designs') {
+                document.getElementById('designs-mgmt-section').style.display = 'block';
+                tabs[3].classList.add('active');
+            }
+        }
+
+        function renderDashboard() {
+            const count = (siteConfig.heroImages && siteConfig.heroImages.length) ? siteConfig.heroImages.length : 1;
+            document.getElementById('hero-image-count').value = count;
+            renderHeroUploadZones();
+            updateOverviewPreview(siteConfig.overviewImage);
+
+            document.getElementById('hero-title').value = siteConfig.heroTitle || 'WELCOME TO KKT HOMES';
+            document.getElementById('hero-subtitle').value = siteConfig.heroSubtitle || 'We Build Your Dream House';
+            document.getElementById('hero-btn-text').value = siteConfig.heroBtnText || 'Contact us';
+
+            document.getElementById('overview-title').value = siteConfig.overviewTitle || 'Overview';
+            document.getElementById('overview-text').value = siteConfig.overviewText || '';
+
+            // About Page
+            updateAboutHeroPreview(siteConfig.aboutPageHeroImage);
+            updateAboutContentPreview(siteConfig.aboutPageContentImage);
+            document.getElementById('about-vision-title').value = siteConfig.aboutPageTitle || 'Our Vision';
+            document.getElementById('about-vision-text').value = siteConfig.aboutPageText || '';
+
+            // Services Page
+            const sp = siteConfig.servicesPage || {};
+            updateServicesHeroPreview(sp.heroImg || '');
+            document.getElementById('services-hero-title').value = sp.heroTitle || 'OUR SERVICES';
+            document.getElementById('services-hero-subtitle').value = sp.heroSubtitle || '';
+            document.getElementById('services-header-title-input').value = sp.headerTitle || 'Expertise We Offer';
+
+            // Removed fixed extra services rendering, using renderExtraServices() instead.
+
+            // Render Stats
+            if (siteConfig.stats) {
+                siteConfig.stats.forEach((stat, i) => {
+                    document.getElementById(`stat-val-${i + 1}`).value = stat.val;
+                    document.getElementById(`stat-lab-${i + 1}`).value = stat.lab;
+                });
+            }
+
+            // Render Services
+            renderMainServices();
+            renderExtraServices();
+
+            // Render Projects
+            const projCount = (siteConfig.projects && siteConfig.projects.length) ? siteConfig.projects.length : 3;
+            document.getElementById('project-count').value = projCount;
+            renderProjectUploadZones();
+
+            // Render Designs
+            renderDesignUploadZones();
+        }
+
+        // Removed fixed setupServiceUploads and handleServiceFile as they are merged into dynamic renderMainServices
+    </script>
+</body>
+
+</html>
