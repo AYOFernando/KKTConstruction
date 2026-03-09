@@ -7,14 +7,35 @@ let slideInterval;
 let currentProjIndex = 0;
 let projectsData = [];
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     try {
-        const configItem = localStorage.getItem('kkt_site_config');
-        if (configItem) {
-            const config = JSON.parse(configItem);
+        let config;
+
+        // Try fetching config.json from server/GitHub first
+        try {
+            const res = await fetch('./config.json');
+            if (res.ok) {
+                config = await res.json();
+                console.log('Loaded config from config.json');
+            }
+        } catch (err) {
+            console.log('config.json not found or server offline, checking localStorage');
+        }
+
+        // Fallback to localStorage if no config.json
+        if (!config) {
+            const configItem = localStorage.getItem('kkt_site_config');
+            if (configItem) {
+                config = JSON.parse(configItem);
+                console.log('Loaded config from localStorage');
+            }
+        }
+
+        if (config) {
             loadDynamicContent(config);
         } else {
-            // Load defaults if no config exists
+            // Load defaults if no config exists anywhere
+            console.log('No config found, loading defaults');
             loadDynamicContent({
                 services: [
                     { img: 'hero-bg.jpg', title: 'House Constructions', desc: 'Quality craftsmanship for your dream home.' },

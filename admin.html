@@ -570,68 +570,87 @@
             });
         }
 
-        function setupGenericUpload(zoneId, inputId, callback) {
+        async function setupGenericUpload(zoneId, inputId, callback) {
             const dropZone = document.getElementById(zoneId);
             const input = document.getElementById(inputId);
             if (!dropZone || !input) return;
 
-            dropZone.onclick = () => input.click();
-            input.onchange = (e) => {
-                const file = e.target.files[0];
+            const handleFile = async (file) => {
                 if (file && file.type.startsWith('image/')) {
-                    const reader = new FileReader();
-                    reader.onload = (e) => callback(e.target.result);
-                    reader.readAsDataURL(file);
+                    const formData = new FormData();
+                    formData.append('image', file);
+                    try {
+                        const loadingText = dropZone.querySelector('p');
+                        const originalText = loadingText.innerText;
+                        loadingText.innerText = 'Uploading...';
+
+                        const res = await fetch('/upload', { method: 'POST', body: formData });
+                        const data = await res.json();
+                        callback(data.imageUrl);
+
+                        loadingText.innerText = originalText;
+                    } catch (err) {
+                        console.error('Upload failed:', err);
+                        alert('Upload failed. Is the server running?');
+                    }
                 }
             };
 
-            dropZone.ondragover = (e) => {
-                e.preventDefault();
-                dropZone.classList.add('dragover');
-            };
+            dropZone.onclick = () => input.click();
+            input.onchange = (e) => handleFile(e.target.files[0]);
+
+            dropZone.ondragover = (e) => { e.preventDefault(); dropZone.classList.add('dragover'); };
             dropZone.ondragleave = () => dropZone.classList.remove('dragover');
             dropZone.ondrop = (e) => {
                 e.preventDefault();
                 dropZone.classList.remove('dragover');
-                if (e.dataTransfer.files.length) {
-                    const file = e.dataTransfer.files[0];
-                    if (file && file.type.startsWith('image/')) {
-                        const reader = new FileReader();
-                        reader.onload = (e) => callback(e.target.result);
-                        reader.readAsDataURL(file);
-                    }
-                }
+                if (e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
             };
         }
 
-        function handleHeroFileSelection(file, index) {
+        async function handleHeroFileSelection(file, index) {
             if (!file || !file.type.startsWith('image/')) return;
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                siteConfig.heroImages[index] = e.target.result;
-                updateHeroPreview(index, e.target.result);
-            };
-            reader.readAsDataURL(file);
+            const formData = new FormData();
+            formData.append('image', file);
+            try {
+                const res = await fetch('/upload', { method: 'POST', body: formData });
+                const data = await res.json();
+                siteConfig.heroImages[index] = data.imageUrl;
+                updateHeroPreview(index, data.imageUrl);
+            } catch (err) {
+                console.error('Hero upload failed:', err);
+                alert('Upload failed');
+            }
         }
 
-        function handleProjectFileSelection(file, index) {
+        async function handleProjectFileSelection(file, index) {
             if (!file || !file.type.startsWith('image/')) return;
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                siteConfig.projects[index].img = e.target.result;
-                updateProjectPreview(index, e.target.result);
-            };
-            reader.readAsDataURL(file);
+            const formData = new FormData();
+            formData.append('image', file);
+            try {
+                const res = await fetch('/upload', { method: 'POST', body: formData });
+                const data = await res.json();
+                siteConfig.projects[index].img = data.imageUrl;
+                updateProjectPreview(index, data.imageUrl);
+            } catch (err) {
+                console.error('Project upload failed:', err);
+                alert('Upload failed');
+            }
         }
 
-        function handleDesignFileSelection(file, index) {
+        async function handleDesignFileSelection(file, index) {
             if (!file || !file.type.startsWith('image/')) return;
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                siteConfig.designs[index].img = e.target.result;
-                updateDesignPreview(index, e.target.result);
-            };
-            reader.readAsDataURL(file);
+            const formData = new FormData();
+            formData.append('image', file);
+            try {
+                const res = await fetch('/upload', { method: 'POST', body: formData });
+                const data = await res.json();
+                siteConfig.designs[index].img = data.imageUrl;
+                updateDesignPreview(index, data.imageUrl);
+            } catch (err) {
+                console.error('Design upload failed:', err);
+                alert('Upload failed');
+            }
         }
 
         function handleOverviewFileSelection(file) {
@@ -772,7 +791,7 @@
             window.location.reload();
         });
 
-        saveBtn.addEventListener('click', () => {
+        saveBtn.addEventListener('click', async () => {
             siteConfig.heroTitle = document.getElementById('hero-title').value;
             siteConfig.heroSubtitle = document.getElementById('hero-subtitle').value;
             siteConfig.heroBtnText = document.getElementById('hero-btn-text').value;
@@ -839,17 +858,28 @@
 
             const status = document.getElementById('save-status');
             try {
-                localStorage.setItem('kkt_site_config', JSON.stringify(siteConfig));
-                status.innerText = 'successfully saved';
-                status.style.color = '#00ff00';
+                // Save to server
+                const res = await fetch('/save-config', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(siteConfig)
+                });
+
+                if (res.ok) {
+                    // Update localStorage backup
+                    localStorage.setItem('kkt_site_config', JSON.stringify(siteConfig));
+                    status.innerText = 'successfully saved to server';
+                    status.style.color = '#00ff00';
+                } else {
+                    throw new Error('Server returned error');
+                }
             } catch (e) {
                 console.error('Save failed:', e);
-                if (e.name === 'QuotaExceededError') {
-                    status.innerText = 'Error: Images are too large! Please use smaller images.';
-                } else {
-                    status.innerText = 'Error saving changes. Please try again.';
-                }
+                status.innerText = 'Error: Make sure "server.js" is running!';
                 status.style.color = 'red';
+
+                // Fallback to localStorage only if server is down
+                localStorage.setItem('kkt_site_config', JSON.stringify(siteConfig));
             }
 
             status.style.display = 'block';
@@ -924,14 +954,19 @@
             }
         }
 
-        function handleMainServiceFile(index, file) {
+        async function handleMainServiceFile(index, file) {
             if (!file) return;
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                siteConfig.services[index].img = e.target.result;
+            const formData = new FormData();
+            formData.append('image', file);
+            try {
+                const res = await fetch('/upload', { method: 'POST', body: formData });
+                const data = await res.json();
+                siteConfig.services[index].img = data.imageUrl;
                 renderMainServices();
-            };
-            reader.readAsDataURL(file);
+            } catch (err) {
+                console.error('Service upload failed:', err);
+                alert('Upload failed');
+            }
         }
 
         function removeMainServiceImage(index) {
