@@ -6,7 +6,7 @@
   "heroTitle": "WELCOME TO KKT HOMES",
   "heroSubtitle": "We Build Your Dream House",
   "heroBtnText": "Contact us",
-  "overviewImage": "",
+  "overviewImage": "images/image-1773129814220-483453530.png",
   "overviewTitle": "Overview",
   "overviewText": "<strong>Quality</strong> craftsmanship ensures every project meets our high standards.",
   "stats": [
@@ -29,17 +29,17 @@
   ],
   "services": [
     {
-      "img": "",
+      "img": "images/image-1773130004948-494086481.png",
       "title": "House Constructions",
       "desc": "More section and home designs to suit your needs. Construction supervised by an experienced qualified team."
     },
     {
-      "img": "",
+      "img": "images/image-1773130046642-889576781.png",
       "title": "Building Constructions",
       "desc": "We amongst the foremost well acknowledged construction firms in country, with a wealth of numerous expertise."
     },
     {
-      "img": "",
+      "img": "images/image-1773130084478-313288189.png",
       "title": "House Plan",
       "desc": "Perhaps you have already selected a lot, but are having difficulty finding a house that fits?"
     }
