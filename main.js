@@ -258,6 +258,15 @@ function loadDynamicContent(config) {
         ];
         renderDesigns(defaultDesigns);
     }
+
+    // Update Contact Information (Global)
+    const phoneEls = document.querySelectorAll('[id^="dynamic-phone"]');
+    const emailEls = document.querySelectorAll('[id^="dynamic-email"]');
+    const addressEls = document.querySelectorAll('[id^="dynamic-address"]');
+
+    if (config.sitePhone) phoneEls.forEach(el => el.innerText = config.sitePhone);
+    if (config.siteEmail) emailEls.forEach(el => el.innerText = config.siteEmail);
+    if (config.siteAddress) addressEls.forEach(el => el.innerText = config.siteAddress);
 }
 
 
