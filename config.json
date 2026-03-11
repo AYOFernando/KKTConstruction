@@ -72,19 +72,19 @@
     "headerTitle": "Expertise We Offer",
     "extraServices": [
       {
-        "img": "",
+        "img": "images/image-1773203394732-409853831.png",
         "icon": "fas fa-drafting-compass",
         "title": "3D Modeling",
         "desc": "Visualize your project before construction begins with our high-end 3D rendering and modeling services."
       },
       {
-        "img": "",
+        "img": "images/image-1773203588884-201557986.png",
         "icon": "fas fa-file-invoice-dollar",
         "title": "BOQ Estimation",
         "desc": "Transparent and accurate Bill of Quantities (BOQ) to help you manage your budget effectively without surprises."
       },
       {
-        "img": "",
+        "img": "images/image-1773203760889-143398940.png",
         "icon": "fas fa-hard-hat",
         "title": "Site Supervision",
         "desc": "Dedicated site supervisors to ensure the work progresses on schedule and adheres to the highest safety standards."
