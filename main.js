@@ -207,9 +207,21 @@ function loadDynamicContent(config) {
                 const card = document.createElement('div');
                 card.className = 'service-card';
                 card.style.padding = '30px';
+
+                let mediaHtml = '';
+                if (extra.img) {
+                    mediaHtml = `
+                        <div class="service-image-container" style="margin-bottom: 1.5rem;">
+                            <img src="${extra.img}" alt="${extra.title}" class="service-img" style="border-radius: 8px;">
+                        </div>`;
+                } else {
+                    mediaHtml = `
+                        <i id="extra-service-icon-${i + 1}" class="${extra.icon || 'fas fa-star'}"
+                            style="font-size: 2rem; color: var(--primary-red); margin-bottom: 1rem;"></i>`;
+                }
+
                 card.innerHTML = `
-                    <i id="extra-service-icon-${i + 1}" class="${extra.icon || 'fas fa-star'}"
-                        style="font-size: 2rem; color: var(--primary-red); margin-bottom: 1rem;"></i>
+                    ${mediaHtml}
                     <h3 id="extra-service-title-${i + 1}">${extra.title}</h3>
                     <p id="extra-service-desc-${i + 1}">${extra.desc}</p>
                 `;

@@ -1,7 +1,7 @@
 {
   "heroImages": [
     "images/image-1773045593230-708244274.jpg",
-    "images/image-1773129667977-794235905.jpg"
+    "images/image-1773202765943-987276118.png"
   ],
   "heroTitle": "WELCOME TO KKT HOMES",
   "heroSubtitle": "We Build Your Dream House",
@@ -72,16 +72,19 @@
     "headerTitle": "Expertise We Offer",
     "extraServices": [
       {
+        "img": "",
         "icon": "fas fa-drafting-compass",
         "title": "3D Modeling",
         "desc": "Visualize your project before construction begins with our high-end 3D rendering and modeling services."
       },
       {
+        "img": "",
         "icon": "fas fa-file-invoice-dollar",
         "title": "BOQ Estimation",
         "desc": "Transparent and accurate Bill of Quantities (BOQ) to help you manage your budget effectively without surprises."
       },
       {
+        "img": "",
         "icon": "fas fa-hard-hat",
         "title": "Site Supervision",
         "desc": "Dedicated site supervisors to ensure the work progresses on schedule and adheres to the highest safety standards."

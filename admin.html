@@ -849,12 +849,19 @@
 
             // Save Extra Services
             const extraServiceContainers = document.querySelectorAll('#extra-services-container > div');
+            const oldExtraServices = siteConfig.servicesPage.extraServices || [];
             siteConfig.servicesPage.extraServices = [];
             extraServiceContainers.forEach((container, i) => {
                 const icon = document.getElementById(`extra-service-icon-${i}`)?.value || '';
                 const title = document.getElementById(`extra-service-title-${i}`)?.value || '';
                 const desc = document.getElementById(`extra-service-desc-${i}`)?.value || '';
-                siteConfig.servicesPage.extraServices.push({ icon, title, desc });
+                const existingImg = oldExtraServices[i]?.img || '';
+                siteConfig.servicesPage.extraServices.push({
+                    img: existingImg,
+                    icon,
+                    title,
+                    desc
+                });
             });
 
             // Save Projects
@@ -1004,8 +1011,20 @@
                             <i class="fas fa-trash"></i> Delete
                         </button>
                     </div>
+                    <div class="upload-group" style="margin-bottom: 1rem;">
+                        <label>Service Image (Optional)</label>
+                        <div class="upload-zone" id="extra-service-drop-zone-${i}" onclick="document.getElementById('extra-service-file-input-${i}').click()" style="${extra.img ? 'display:none' : 'display:flex'}">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>Drag & drop or Click to upload</p>
+                            <input type="file" id="extra-service-file-input-${i}" hidden accept="image/*" onchange="handleExtraServiceFile(${i}, this.files[0])">
+                        </div>
+                        <div id="extra-service-preview-${i}" class="preview-container" style="${extra.img ? 'display:block' : 'display:none'}">
+                            <img src="${extra.img}" alt="Extra Service ${i + 1} Preview" class="preview-img">
+                            <button class="btn-delete-img" onclick="removeExtraServiceImage(${i})"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
                     <div class="form-group">
-                        <label>Icon Class (FontAwesome)</label>
+                        <label>Icon Class (FontAwesome - used if no image)</label>
                         <input type="text" id="extra-service-icon-${i}" value="${extra.icon || ''}" placeholder="fas fa-drafting-compass">
                     </div>
                     <div class="form-group">
@@ -1018,7 +1037,39 @@
                     </div>
                 `;
                 container.appendChild(div);
+
+                // Setup drag and drop for extra service
+                const zone = div.querySelector(`#extra-service-drop-zone-${i}`);
+                if (zone) {
+                    zone.ondragover = (e) => { e.preventDefault(); zone.classList.add('dragover'); };
+                    zone.ondragleave = () => zone.classList.remove('dragover');
+                    zone.ondrop = (e) => {
+                        e.preventDefault();
+                        zone.classList.remove('dragover');
+                        if (e.dataTransfer.files.length) handleExtraServiceFile(i, e.dataTransfer.files[0]);
+                    };
+                }
             });
+        }
+
+        async function handleExtraServiceFile(index, file) {
+            if (!file) return;
+            const formData = new FormData();
+            formData.append('image', file);
+            try {
+                const res = await fetch('/upload', { method: 'POST', body: formData });
+                const data = await res.json();
+                siteConfig.servicesPage.extraServices[index].img = data.imageUrl;
+                renderExtraServices();
+            } catch (err) {
+                console.error('Extra service upload failed:', err);
+                alert('Upload failed');
+            }
+        }
+
+        function removeExtraServiceImage(index) {
+            siteConfig.servicesPage.extraServices[index].img = '';
+            renderExtraServices();
         }
 
         function addExtraService() {
@@ -1098,6 +1149,8 @@
             window.deleteMainService = deleteMainService;
             window.handleMainServiceFile = handleMainServiceFile;
             window.removeMainServiceImage = removeMainServiceImage;
+            window.handleExtraServiceFile = handleExtraServiceFile;
+            window.removeExtraServiceImage = removeExtraServiceImage;
             window.addExtraService = addExtraService;
             window.deleteExtraService = deleteExtraService;
         }
