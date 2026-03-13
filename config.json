@@ -46,19 +46,29 @@
   ],
   "projects": [
     {
-      "img": "",
+      "img": "images/image-1773374826319-704370546.png",
       "title": "The Zenith Villa",
       "loc": "Colombo, Sri Lanka"
     },
     {
-      "img": "",
+      "img": "images/image-1773374893583-559807319.png",
       "title": "Lumina Residence",
       "loc": "Kandy, Sri Lanka"
     },
     {
-      "img": "",
+      "img": "images/image-1773374934092-545784675.png",
       "title": "Azure Heights",
       "loc": "Galle, Sri Lanka"
+    },
+    {
+      "img": "images/image-1773375008644-844655378.png",
+      "title": "Housing Projecct",
+      "loc": "Kandy, Sri Lankaa"
+    },
+    {
+      "img": "images/image-1773375359517-221481135.jpeg",
+      "title": "Housing Project",
+      "loc": "Kandy, Sri Lanka"
     }
   ],
   "aboutPageHeroImage": "",
