@@ -47,18 +47,18 @@
   "projects": [
     {
       "img": "images/image-1773374826319-704370546.png",
-      "title": "The Zenith Villa",
+      "title": "Interior Project",
       "loc": "Colombo, Sri Lanka"
     },
     {
       "img": "images/image-1773374893583-559807319.png",
-      "title": "Lumina Residence",
+      "title": "Miriswattha Project",
       "loc": "Kandy, Sri Lanka"
     },
     {
       "img": "images/image-1773374934092-545784675.png",
-      "title": "Azure Heights",
-      "loc": "Galle, Sri Lanka"
+      "title": "Housing Project",
+      "loc": "Kandy, Sri Lanka"
     },
     {
       "img": "images/image-1773375008644-844655378.png",
@@ -120,5 +120,5 @@
   ],
   "sitePhone": "0761358200",
   "siteEmail": "info@kktconstructions.lk",
-  "siteAddress": "No.656, Peradeniya road, Kandy"
+  "siteAddress": "No. 123, Galle Road, Colombo 03, Sri Lanka"
 }
