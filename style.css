@@ -119,7 +119,7 @@ nav {
 .hero-image-container {
     position: relative;
     width: 100%;
-    min-height: 400px;
+    min-height: 300px;
     /* Base height until images load */
     overflow: hidden;
 }
