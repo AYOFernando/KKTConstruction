@@ -142,6 +142,18 @@ function loadDynamicContent(config) {
         if (aboutContentImg) aboutContentImg.src = config.aboutPageContentImage;
     }
 
+    // Update Contact Page Hero
+    if (config.contactPageHeroImage) {
+        const contactHeroImg = document.getElementById('dynamic-contact-hero-img');
+        if (contactHeroImg) contactHeroImg.src = config.contactPageHeroImage;
+    }
+
+    // Update Design Page Hero
+    if (config.designPageHeroImage) {
+        const designHeroImg = document.getElementById('dynamic-design-hero-img');
+        if (designHeroImg) designHeroImg.src = config.designPageHeroImage;
+    }
+
     if (config.aboutPageTitle) {
         const aboutTitle = document.getElementById('dynamic-about-title');
         if (aboutTitle) aboutTitle.innerText = config.aboutPageTitle;
