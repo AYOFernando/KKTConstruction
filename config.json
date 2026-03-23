@@ -72,7 +72,7 @@
       "loc": "Kandy, Sri Lanka"
     }
   ],
-  "aboutPageHeroImage": "",
+  "aboutPageHeroImage": "images/image-1774261647329-683371304.png",
   "aboutPageContentImage": "",
   "aboutPageTitle": "Our Vision",
   "aboutPageText": "At KKT Constructions, we believe in building more than just houses; we build dream homes.",
@@ -149,5 +149,6 @@
         "desc": "We have expanded on the variety of construction services we extend to our clients by branching into handling residential construction projects in Sri Lanka. "
       }
     ]
-  }
+  },
+  "sponsors": []
 }

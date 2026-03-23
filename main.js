@@ -276,6 +276,22 @@ function loadDynamicContent(config) {
         }
     }
 
+    // Update Sponsors Marquee
+    const sponsorsContainer = document.getElementById('dynamic-sponsors-container');
+    if (sponsorsContainer && config.sponsors && config.sponsors.length > 0) {
+        sponsorsContainer.innerHTML = '';
+        // Duplicate the sponsors array to create a seamless infinite scroll loop
+        const displaySponsors = [...config.sponsors, ...config.sponsors];
+        displaySponsors.forEach((src) => {
+            if (src) {
+                const img = document.createElement('img');
+                img.src = src;
+                img.alt = 'Sponsor';
+                sponsorsContainer.appendChild(img);
+            }
+        });
+    }
+
     // Update Featured Projects
     if (config.projects && config.projects.length > 0) {
         projectsData = config.projects; // Use all projects, fallback if img is missing

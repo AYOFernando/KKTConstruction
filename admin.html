@@ -355,6 +355,18 @@
             <div id="general-mgmt-section" style="display: none;">
                 <div class="dashboard-grid">
                     <div class="dashboard-section">
+                        <h3>Sponsors Slideshow</h3>
+                        <div class="form-group">
+                            <label>Number of Sponsor Images</label>
+                            <input type="number" id="sponsor-count" min="1" max="20" value="1"
+                                onchange="renderSponsorUploadZones()">
+                        </div>
+                        <div id="sponsor-upload-container">
+                            <!-- JS generated -->
+                        </div>
+                    </div>
+
+                    <div class="dashboard-section">
                         <h3>General Contact Info</h3>
                         <div class="form-group">
                             <label>Contact Phone Number</label>
@@ -504,6 +516,78 @@
                     if (e.dataTransfer.files.length) {
                         handleHeroFileSelection(e.dataTransfer.files[0], i);
                     }
+                };
+
+                container.appendChild(group);
+            }
+        }
+
+        function handleSponsorFileSelection(file, index) {
+            if (file && file.type.startsWith('image/')) {
+                const formData = new FormData();
+                formData.append('image', file);
+                const dropZone = document.getElementById(`sponsor-drop-zone-${index}`);
+                const loadingText = dropZone.querySelector('p');
+                loadingText.innerText = 'Uploading...';
+                fetch('/upload', { method: 'POST', body: formData })
+                    .then(res => res.json())
+                    .then(data => {
+                        siteConfig.sponsors[index] = data.imageUrl;
+                        renderSponsorUploadZones();
+                    })
+                    .catch(err => {
+                        console.error('Upload failed:', err);
+                        alert('Upload failed!');
+                        loadingText.innerText = 'Drag & drop or Click to upload';
+                    });
+            }
+        }
+
+        function deleteSponsorImage(index) {
+            siteConfig.sponsors[index] = '';
+            renderSponsorUploadZones();
+        }
+
+        function renderSponsorUploadZones() {
+            siteConfig.sponsors = siteConfig.sponsors || [];
+            const count = parseInt(document.getElementById('sponsor-count').value) || Math.max(1, siteConfig.sponsors.length);
+            document.getElementById('sponsor-count').value = count;
+            const container = document.getElementById('sponsor-upload-container');
+            if(!container) return;
+            container.innerHTML = '';
+
+            while (siteConfig.sponsors.length > count) siteConfig.sponsors.pop();
+            while (siteConfig.sponsors.length < count) siteConfig.sponsors.push('');
+
+            for (let i = 0; i < count; i++) {
+                const group = document.createElement('div');
+                group.className = 'upload-group';
+                group.style.marginBottom = '2rem';
+                
+                const imgUrl = siteConfig.sponsors[i];
+                
+                group.innerHTML = `
+                    <h4>Sponsor ${i + 1}</h4>
+                    <div class="upload-zone" id="sponsor-drop-zone-${i}" onclick="document.getElementById('sponsor-file-input-${i}').click()">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Drag & drop or Click to upload</p>
+                        <input type="file" id="sponsor-file-input-${i}" hidden accept="image/*" onchange="handleSponsorFileSelection(this.files[0], ${i})">
+                    </div>
+                    <div id="sponsor-preview-${i}" class="preview-container" style="${imgUrl ? 'display:block' : 'display:none'}">
+                        <img src="${imgUrl || ''}" alt="Sponsor Preview ${i}" class="preview-img">
+                        <button class="btn-delete-img" onclick="deleteSponsorImage(${i})"><i class="fas fa-trash"></i></button>
+                    </div>
+                `;
+
+                const dropZone = group.querySelector(`#sponsor-drop-zone-${i}`);
+                if (imgUrl) dropZone.style.display = 'none';
+
+                dropZone.ondragover = (e) => { e.preventDefault(); dropZone.classList.add('dragover'); };
+                dropZone.ondragleave = () => dropZone.classList.remove('dragover');
+                dropZone.ondrop = (e) => {
+                    e.preventDefault();
+                    dropZone.classList.remove('dragover');
+                    if (e.dataTransfer.files.length) handleSponsorFileSelection(e.dataTransfer.files[0], i);
                 };
 
                 container.appendChild(group);
@@ -1298,6 +1382,9 @@
             window.handleProjectFileSelection = handleProjectFileSelection;
             window.handleHeroFileSelection = handleHeroFileSelection;
             window.handleOverviewFileSelection = handleOverviewFileSelection;
+            window.renderSponsorUploadZones = renderSponsorUploadZones;
+            window.handleSponsorFileSelection = handleSponsorFileSelection;
+            window.deleteSponsorImage = deleteSponsorImage;
             window.renderProjectUploadZones = renderProjectUploadZones;
             window.renderHeroUploadZones = renderHeroUploadZones;
             window.renderDesignUploadZones = renderDesignUploadZones;
@@ -1426,6 +1513,9 @@
             // Render Services
             renderMainServices();
             renderExtraServices();
+
+            // Render Sponsors
+            renderSponsorUploadZones();
 
             // Render Projects
             const projCount = (siteConfig.projects && siteConfig.projects.length) ? siteConfig.projects.length : 3;
