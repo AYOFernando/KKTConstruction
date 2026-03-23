@@ -45,7 +45,6 @@
                 <button class="tab-btn" onclick="switchTab('about')">About Page</button>
                 <button class="tab-btn" onclick="switchTab('designs')">Designs Page</button>
                 <button class="tab-btn" onclick="switchTab('contact')">Contact Page</button>
-                <button class="tab-btn" onclick="switchTab('why-choose-us')">Why Choose Us</button>
                 <button class="tab-btn" onclick="switchTab('general')">General Settings</button>
             </div>
 
@@ -266,11 +265,12 @@
                             <textarea id="about-vision-text" rows="4" placeholder="At KKT Constructions..."></textarea>
                         </div>
                     </div>
-                </div>
-            </div> <!-- End of about-mgmt-section -->
+                    
+                    <div class="dashboard-section" style="grid-column: 1 / -1;">
+                        <hr style="margin: 2rem 0; border: 1px solid #333;">
+                        <h2 style="color: var(--primary-red); margin-bottom: 1rem;">Why Choose Us Section</h2>
+                    </div>
 
-            <div id="why-choose-us-mgmt-section" style="display: none;">
-                <div class="dashboard-grid">
                     <div class="dashboard-section">
                         <h3>Why Choose Us Details</h3>
                         <div class="upload-group" style="margin-bottom: 2rem;">
@@ -298,7 +298,7 @@
                         </div>
                     </div>
                 </div>
-            </div> <!-- End of why-choose-us-mgmt-section -->
+            </div> <!-- End of about-mgmt-section -->
 
             <div id="designs-mgmt-section" style="display: none;">
                 <div class="dashboard-grid">
@@ -1323,8 +1323,7 @@
                 'services-mgmt-section',
                 'designs-mgmt-section',
                 'contact-mgmt-section',
-                'general-mgmt-section',
-                'why-choose-us-mgmt-section'
+                'general-mgmt-section'
             ];
 
             sections.forEach(id => {
@@ -1353,9 +1352,6 @@
             } else if (tab === 'general') {
                 document.getElementById('general-mgmt-section').style.display = 'block';
                 tabs[5].classList.add('active');
-            } else if (tab === 'why-choose-us') {
-                document.getElementById('why-choose-us-mgmt-section').style.display = 'block';
-                tabs[6].classList.add('active');
             }
         }
 
