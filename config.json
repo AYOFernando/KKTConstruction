@@ -52,14 +52,29 @@
       "loc": "Kandy, Sri Lanka"
     },
     {
-      "img": "",
+      "img": "images/image-1774249063153-265740359.png",
       "title": "Lumina Residence",
       "loc": "Kandy, Sri Lanka"
     },
     {
-      "img": "",
+      "img": "images/image-1774249093066-646825354.png",
       "title": "Azure Heights",
       "loc": "Galle, Sri Lanka"
+    },
+    {
+      "img": "images/image-1774249152832-671817218.png",
+      "title": "",
+      "loc": ""
+    },
+    {
+      "img": "images/image-1774249203083-630348406.png",
+      "title": "",
+      "loc": ""
+    },
+    {
+      "img": "",
+      "title": "",
+      "loc": ""
     }
   ],
   "aboutPageHeroImage": "",
