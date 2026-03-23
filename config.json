@@ -129,24 +129,24 @@
     "title": "WHY CHOOSE US",
     "features": [
       {
-        "title": "",
-        "icon": "",
-        "desc": ""
+        "title": "Building Constructions",
+        "icon": "fa-building",
+        "desc": "We amongst the foremost well acknowledged construction firms in country, with a wealth of numerous expertise and exposure."
       },
       {
-        "title": "",
-        "icon": "",
-        "desc": ""
+        "title": "House Constructions",
+        "icon": "fa-tools",
+        "desc": "Home designs to suit your needs. Construction supervised by an experienced qualified team. All will be arranged by professional well trained staff"
       },
       {
-        "title": "",
-        "icon": "",
-        "desc": ""
+        "title": "House Plans",
+        "icon": "fa-house",
+        "desc": "Perhaps you have already selected a lot, but are having difficulty finding a house that fits? Deciding on the perfect design for your new home can feel overwhelming."
       },
       {
-        "title": "",
-        "icon": "",
-        "desc": ""
+        "title": "BoQ",
+        "icon": "fa-code",
+        "desc": "We have expanded on the variety of construction services we extend to our clients by branching into handling residential construction projects in Sri Lanka. "
       }
     ]
   }
