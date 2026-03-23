@@ -164,6 +164,40 @@ function loadDynamicContent(config) {
         if (aboutText) aboutText.innerText = config.aboutPageText;
     }
 
+    // Update Why Choose Us Section
+    if (config.whyChooseUs) {
+        const wcuData = config.whyChooseUs;
+        const wcuImg = document.getElementById('dynamic-wcu-img');
+        const wcuTitle = document.getElementById('dynamic-wcu-title');
+        const wcuFeatures = document.getElementById('dynamic-wcu-features');
+
+        if (wcuImg && wcuData.image) wcuImg.src = wcuData.image;
+        if (wcuTitle && wcuData.title) {
+            const parts = wcuData.title.split(' ');
+            const firstWord = parts.shift() || '';
+            const rest = parts.join(' ');
+            wcuTitle.innerHTML = `<span style="color:#333;">${firstWord}</span> <span class="primary-red-text" style="color:var(--primary-red);">${rest}</span>`;
+        }
+        
+        if (wcuFeatures && wcuData.features) {
+            wcuFeatures.innerHTML = '';
+            wcuData.features.forEach(f => {
+                const featureDiv = document.createElement('div');
+                featureDiv.className = 'wcu-feature';
+                featureDiv.innerHTML = `
+                    <div class="wcu-feature-icon">
+                        <i class="${f.icon}"></i>
+                    </div>
+                    <div class="wcu-feature-content">
+                        <h3>${f.title}</h3>
+                        <p>${f.desc}</p>
+                    </div>
+                `;
+                wcuFeatures.appendChild(featureDiv);
+            });
+        }
+    }
+
     // Update Stats Bar
     if (config.stats) {
         config.stats.forEach((stat, i) => {

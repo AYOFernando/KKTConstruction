@@ -45,6 +45,7 @@
                 <button class="tab-btn" onclick="switchTab('about')">About Page</button>
                 <button class="tab-btn" onclick="switchTab('designs')">Designs Page</button>
                 <button class="tab-btn" onclick="switchTab('contact')">Contact Page</button>
+                <button class="tab-btn" onclick="switchTab('why-choose-us')">Why Choose Us</button>
                 <button class="tab-btn" onclick="switchTab('general')">General Settings</button>
             </div>
 
@@ -267,6 +268,37 @@
                     </div>
                 </div>
             </div> <!-- End of about-mgmt-section -->
+
+            <div id="why-choose-us-mgmt-section" style="display: none;">
+                <div class="dashboard-grid">
+                    <div class="dashboard-section">
+                        <h3>Why Choose Us Details</h3>
+                        <div class="upload-group" style="margin-bottom: 2rem;">
+                            <label>Side Image</label>
+                            <div class="upload-zone" id="wcu-image-drop-zone">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>Drag & drop or Click to upload</p>
+                                <input type="file" id="wcu-image-file-input" hidden accept="image/*">
+                            </div>
+                            <div id="wcu-image-preview" class="preview-container">
+                                <img src="" alt="WCU Preview" class="preview-img">
+                                <button class="btn-delete-img" onclick="deleteImage('wcu-image')"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Section Title</label>
+                            <input type="text" id="wcu-title" placeholder="WHY CHOOSE US">
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-section">
+                        <h3>Features Grid (4 Items)</h3>
+                        <div id="wcu-features-container">
+                            <!-- JS will generate these 4 groups -->
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- End of why-choose-us-mgmt-section -->
 
             <div id="designs-mgmt-section" style="display: none;">
                 <div class="dashboard-grid">
@@ -651,6 +683,13 @@
                 siteConfig.contactPageHeroImage = img;
                 updateContactHeroPreview(img);
             });
+
+            // Why Choose Us
+            setupGenericUpload('wcu-image-drop-zone', 'wcu-image-file-input', (img) => {
+                siteConfig.whyChooseUs = siteConfig.whyChooseUs || {};
+                siteConfig.whyChooseUs.image = img;
+                updateWcuImagePreview(img);
+            });
         }
 
         async function setupGenericUpload(zoneId, inputId, callback) {
@@ -837,6 +876,19 @@
             updateHeroPreview(index, '');
         };
 
+        function updateWcuImagePreview(src) {
+            const preview = document.getElementById('wcu-image-preview');
+            const dropZone = document.getElementById('wcu-image-drop-zone');
+            if (src) {
+                preview.querySelector('img').src = src;
+                preview.style.display = 'block';
+                dropZone.style.display = 'none';
+            } else {
+                preview.style.display = 'none';
+                dropZone.style.display = 'block';
+            }
+        }
+
         window.deleteImage = (type) => {
             if (type === 'overview') {
                 siteConfig.overviewImage = '';
@@ -856,6 +908,9 @@
             } else if (type === 'contact-hero') {
                 siteConfig.contactPageHeroImage = '';
                 updateContactHeroPreview('');
+            } else if (type === 'wcu-image') {
+                siteConfig.whyChooseUs.image = '';
+                updateWcuImagePreview('');
             }
         };
 
@@ -905,6 +960,21 @@
             siteConfig.servicesPage.heroTitle = document.getElementById('services-hero-title').value;
             siteConfig.servicesPage.heroSubtitle = document.getElementById('services-hero-subtitle').value;
             siteConfig.servicesPage.headerTitle = document.getElementById('services-header-title-input').value;
+
+            // Save WCU
+            siteConfig.whyChooseUs = siteConfig.whyChooseUs || {};
+            siteConfig.whyChooseUs.title = document.getElementById('wcu-title').value;
+            siteConfig.whyChooseUs.features = [];
+            for(let i=1; i<=4; i++) {
+                const titleEl = document.getElementById(`wcu-f-title-${i}`);
+                if (titleEl) {
+                    siteConfig.whyChooseUs.features.push({
+                        title: titleEl.value,
+                        icon: document.getElementById(`wcu-f-icon-${i}`).value,
+                        desc: document.getElementById(`wcu-f-desc-${i}`).value
+                    });
+                }
+            }
 
             // Save Stats
             siteConfig.stats = [];
@@ -1253,7 +1323,8 @@
                 'services-mgmt-section',
                 'designs-mgmt-section',
                 'contact-mgmt-section',
-                'general-mgmt-section'
+                'general-mgmt-section',
+                'why-choose-us-mgmt-section'
             ];
 
             sections.forEach(id => {
@@ -1282,6 +1353,29 @@
             } else if (tab === 'general') {
                 document.getElementById('general-mgmt-section').style.display = 'block';
                 tabs[5].classList.add('active');
+            } else if (tab === 'why-choose-us') {
+                document.getElementById('why-choose-us-mgmt-section').style.display = 'block';
+                tabs[6].classList.add('active');
+            }
+        }
+
+        function renderWcuFeatures(features) {
+            const container = document.getElementById('wcu-features-container');
+            if(!container) return;
+            container.innerHTML = '';
+            for(let i=0; i<4; i++) {
+                let f = features && features[i] ? features[i] : {title:'', icon:'', desc:''};
+                container.innerHTML += `
+                    <div class="form-group" style="padding: 1rem; border: 1px solid #333; border-radius: 5px; margin-bottom: 1rem;">
+                        <h4 style="margin-bottom:0.5rem; color: #fff;">Feature ${i+1}</h4>
+                        <label>Title</label>
+                        <input type="text" id="wcu-f-title-${i+1}" value="${f.title}" style="margin-bottom: 0.5rem">
+                        <label>Icon (FontAwesome class)</label>
+                        <input type="text" id="wcu-f-icon-${i+1}" value="${f.icon}" style="margin-bottom: 0.5rem">
+                        <label>Description</label>
+                        <textarea id="wcu-f-desc-${i+1}" rows="2">${f.desc}</textarea>
+                    </div>
+                `;
             }
         }
 
@@ -1303,6 +1397,12 @@
             updateAboutContentPreview(siteConfig.aboutPageContentImage);
             document.getElementById('about-vision-title').value = siteConfig.aboutPageTitle || 'Our Vision';
             document.getElementById('about-vision-text').value = siteConfig.aboutPageText || '';
+
+            // Why Choose Us
+            const wcu = siteConfig.whyChooseUs || { title: "WHY CHOOSE US", features: [] };
+            updateWcuImagePreview(wcu.image || '');
+            document.getElementById('wcu-title').value = wcu.title || "WHY CHOOSE US";
+            renderWcuFeatures(wcu.features);
 
             // Services Page
             const sp = siteConfig.servicesPage || {};

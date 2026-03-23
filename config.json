@@ -121,7 +121,33 @@
       "loc": "Galle"
     }
   ],
-  "sitePhone": "0761358200",
+  "sitePhone": "+94 76 135 8200",
   "siteEmail": "kkthomessrilanka@gmail.com",
-  "siteAddress": "No. 123, Galle Road, Colombo 03, Sri Lanka"
+  "siteAddress": "kkthomes, 656 Peradeniya Rd, Kandy 20000",
+  "whyChooseUs": {
+    "image": "",
+    "title": "WHY CHOOSE US",
+    "features": [
+      {
+        "icon": "fas fa-home",
+        "title": "Building Constructions",
+        "desc": "We amongst the foremost well acknowledged construction firms in country, with a wealth of numerous expertise and exposure."
+      },
+      {
+        "icon": "fas fa-wrench",
+        "title": "House Constructions",
+        "desc": "More section and home designs to suit your needs. Construction supervised by an experienced qualified team."
+      },
+      {
+        "icon": "fas fa-home",
+        "title": "House Plans",
+        "desc": "Perhaps you have already selected a lot, but are having difficulty finding a house that fits?"
+      },
+      {
+        "icon": "fas fa-signs-post",
+        "title": "BoQ",
+        "desc": "We have expanded on the variety of construction services we extend to our clients by branching into handling residential construction projects."
+      }
+    ]
+  }
 }
