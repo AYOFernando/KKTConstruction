@@ -608,6 +608,65 @@ nav {
     }
 }
 
+/* --- Mobile Nav Updates --- */
+.hamburger {
+    display: none;
+    font-size: 1.8rem;
+    color: white;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .hamburger {
+        display: block;
+    }
+    
+    .nav-links {
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background: linear-gradient(110deg, #ff0000 0%, #b30000 100%);
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+        padding: 2rem 0;
+        transform: translateY(-150%);
+        transition: transform 0.3s ease-in-out;
+        z-index: 999;
+        box-shadow: 0 10px 15px rgba(0,0,0,0.2);
+    }
+    
+    .nav-links.active {
+        transform: translateY(0);
+    }
+    
+    .hero-overlay-content h1 {
+        font-size: 1.5rem;
+    }
+    
+    .hero-overlay-content p {
+        font-size: 0.9rem;
+    }
+    
+    .overview-card {
+        grid-template-columns: 1fr;
+    }
+    
+    .overview-text {
+        padding: 2rem;
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+    
+    #dynamic-extra-services-container {
+        grid-template-columns: 1fr !important;
+    }
+}
+
 /* Admin Panel Styles */
 .admin-body {
     background-color: #ffffff;
