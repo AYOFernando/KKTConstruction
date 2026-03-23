@@ -427,6 +427,10 @@ nav {
     }
 }
 
+#portfolio {
+    background-color: #e5e7e9;
+}
+
 /* Project Slider (3D Effect) */
 .project-slider-container {
     position: relative;
