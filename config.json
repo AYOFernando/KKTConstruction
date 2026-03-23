@@ -58,23 +58,18 @@
     },
     {
       "img": "images/image-1774249093066-646825354.png",
-      "title": "Azure Heights",
-      "loc": "Galle, Sri Lanka"
+      "title": "Housing Project",
+      "loc": "Kandy, Sri lanka"
     },
     {
       "img": "images/image-1774249152832-671817218.png",
-      "title": "",
-      "loc": ""
+      "title": "Ongoing Project",
+      "loc": "Kandy, Sri Lanka"
     },
     {
       "img": "images/image-1774249203083-630348406.png",
-      "title": "",
-      "loc": ""
-    },
-    {
-      "img": "",
-      "title": "",
-      "loc": ""
+      "title": "Internal Design",
+      "loc": "Kandy, Sri Lanka"
     }
   ],
   "aboutPageHeroImage": "",
