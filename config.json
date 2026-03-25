@@ -121,7 +121,7 @@
       "loc": "Galle"
     }
   ],
-  "sitePhone": "0761358200",
+  "sitePhone": "+97 76 135 8200",
   "siteEmail": "kkthomessrilanka@gmail.com",
   "siteAddress": "No. 123, Galle Road, Colombo 03, Sri Lanka",
   "whyChooseUs": {
@@ -151,6 +151,10 @@
     ]
   },
   "sponsors": [
-    "images/image-1774265257198-244499849.png"
+    "images/image-1774265257198-244499849.png",
+    "images/image-1774411067407-284638084.png",
+    "images/image-1774411086406-107967388.png",
+    "images/image-1774411112386-320754052.png",
+    "images/image-1774411171843-731892937.png"
   ]
 }
