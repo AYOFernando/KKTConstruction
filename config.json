@@ -1,15 +1,14 @@
 {
   "heroImages": [
-    "images/image-1774244282671-952543827.png",
-    "images/image-1774244452132-946104357.png",
-    "images/image-1774244409356-252520152.png"
+    "images/image-1773045593230-708244274.jpg",
+    "images/image-1773202872247-703418534.png"
   ],
   "heroTitle": "WELCOME TO KKT HOMES",
   "heroSubtitle": "We Build Your Dream House",
   "heroBtnText": "Contact us",
-  "overviewImage": "images/image-1774246566847-968028697.png",
+  "overviewImage": "images/image-1773129814220-483453530.png",
   "overviewTitle": "Overview",
-  "overviewText": "KKT HOMES was established with a vision to be the passionate leader in the infrastructure constructon industry. Its mission is to uplift the comfort of the nation by enhancing infrastrure sectors\n\nHouse Plan<br>\nHouse Constructions<br>\nBOQ<br>\nBuilding <br>\nConstructions<br>",
+  "overviewText": "<strong>Quality</strong> craftsmanship ensures every project meets our high standards.",
   "stats": [
     {
       "val": "15",
@@ -30,74 +29,72 @@
   ],
   "services": [
     {
-      "img": "images/image-1774246655154-600688530.png",
+      "img": "images/image-1773130225012-120165695.png",
       "title": "House Constructions",
-      "desc": "Home designs to suit your needs. Construction supervised by an experienced qualified team. All will be arranged by professional well trained staff"
+      "desc": "More section and home designs to suit your needs. Construction supervised by an experienced qualified team."
     },
     {
-      "img": "images/image-1774246684387-588738438.png",
+      "img": "images/image-1773130046642-889576781.png",
       "title": "Building Constructions",
       "desc": "We amongst the foremost well acknowledged construction firms in country, with a wealth of numerous expertise."
     },
     {
-      "img": "images/image-1774246714044-255379356.png",
+      "img": "images/image-1773130084478-313288189.png",
       "title": "House Plan",
       "desc": "Perhaps you have already selected a lot, but are having difficulty finding a house that fits?"
     }
   ],
   "projects": [
     {
-      "img": "images/image-1774247957503-717881843.png",
+      "img": "images/image-1773374826319-704370546.png",
+      "title": "Interior Project",
+      "loc": "Colombo, Sri Lanka"
+    },
+    {
+      "img": "images/image-1773374893583-559807319.png",
+      "title": "Miriswattha Project",
+      "loc": "Kandy, Sri Lanka"
+    },
+    {
+      "img": "images/image-1773374934092-545784675.png",
       "title": "Housing Project",
       "loc": "Kandy, Sri Lanka"
     },
     {
-      "img": "images/image-1774249063153-265740359.png",
-      "title": "Lumina Residence",
-      "loc": "Kandy, Sri Lanka"
+      "img": "images/image-1773375008644-844655378.png",
+      "title": "Housing Projecct",
+      "loc": "Kandy, Sri Lankaa"
     },
     {
-      "img": "images/image-1774249093066-646825354.png",
+      "img": "images/image-1773375359517-221481135.jpeg",
       "title": "Housing Project",
-      "loc": "Kandy, Sri lanka"
-    },
-    {
-      "img": "images/image-1774249152832-671817218.png",
-      "title": "Ongoing Project",
-      "loc": "Kandy, Sri Lanka"
-    },
-    {
-      "img": "images/image-1774249203083-630348406.png",
-      "title": "Internal Design",
       "loc": "Kandy, Sri Lanka"
     }
   ],
-  "aboutPageHeroImage": "images/image-1774261647329-683371304.png",
-  "aboutPageContentImage": "",
+  "aboutPageHeroImage": "images/image-1773380232442-510544823.png",
+  "aboutPageContentImage": "images/image-1774421393194-209019605.png",
   "aboutPageTitle": "Our Vision",
   "aboutPageText": "At KKT Constructions, we believe in building more than just houses; we build dream homes.",
-  "contactPageHeroImage": "",
-  "designPageHeroImage": "",
   "servicesPage": {
-    "heroImg": "",
+    "heroImg": "images/image-1773381063104-433759550.png",
     "heroTitle": "OUR SERVICES",
     "heroSubtitle": "Quality Construction Solutions",
     "headerTitle": "Expertise We Offer",
     "extraServices": [
       {
-        "img": "",
+        "img": "images/image-1773203394732-409853831.png",
         "icon": "fas fa-drafting-compass",
         "title": "3D Modeling",
         "desc": "Visualize your project before construction begins with our high-end 3D rendering and modeling services."
       },
       {
-        "img": "",
+        "img": "images/image-1773203588884-201557986.png",
         "icon": "fas fa-file-invoice-dollar",
         "title": "BOQ Estimation",
         "desc": "Transparent and accurate Bill of Quantities (BOQ) to help you manage your budget effectively without surprises."
       },
       {
-        "img": "",
+        "img": "images/image-1773203760889-143398940.png",
         "icon": "fas fa-hard-hat",
         "title": "Site Supervision",
         "desc": "Dedicated site supervisors to ensure the work progresses on schedule and adheres to the highest safety standards."
@@ -108,7 +105,7 @@
     {
       "img": "",
       "title": "Modern Villa",
-      "loc": "Kandy"
+      "loc": "Colombo"
     },
     {
       "img": "",
@@ -121,40 +118,37 @@
       "loc": "Galle"
     }
   ],
-  "sitePhone": "+97 76 135 8200",
-  "siteEmail": "kkthomessrilanka@gmail.com",
+  "sitePhone": "0761358200",
+  "siteEmail": "info@kktconstructions.lk",
   "siteAddress": "No. 123, Galle Road, Colombo 03, Sri Lanka",
+  "designPageHeroImage": "images/image-1773645063180-8175595.jpg",
+  "contactPageHeroImage": "images/image-1773646090374-356897862.png",
+  "sponsors": [
+    ""
+  ],
   "whyChooseUs": {
-    "image": "images/image-1774254618111-951434609.png",
     "title": "WHY CHOOSE US",
     "features": [
       {
-        "title": "Building Constructions",
-        "icon": "fa-building",
-        "desc": "We amongst the foremost well acknowledged construction firms in country, with a wealth of numerous expertise and exposure."
+        "title": "",
+        "icon": "",
+        "desc": ""
       },
       {
-        "title": "House Constructions",
-        "icon": "fa-tools",
-        "desc": "Home designs to suit your needs. Construction supervised by an experienced qualified team. All will be arranged by professional well trained staff"
+        "title": "",
+        "icon": "",
+        "desc": ""
       },
       {
-        "title": "House Plans",
-        "icon": "fa-house",
-        "desc": "Perhaps you have already selected a lot, but are having difficulty finding a house that fits? Deciding on the perfect design for your new home can feel overwhelming."
+        "title": "",
+        "icon": "",
+        "desc": ""
       },
       {
-        "title": "BoQ",
-        "icon": "fa-code",
-        "desc": "We have expanded on the variety of construction services we extend to our clients by branching into handling residential construction projects in Sri Lanka. "
+        "title": "",
+        "icon": "",
+        "desc": ""
       }
     ]
-  },
-  "sponsors": [
-    "images/image-1774265257198-244499849.png",
-    "images/image-1774411067407-284638084.png",
-    "images/image-1774411086406-107967388.png",
-    "images/image-1774411112386-320754052.png",
-    "images/image-1774411171843-731892937.png"
-  ]
+  }
 }
