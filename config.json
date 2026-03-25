@@ -118,13 +118,17 @@
       "loc": "Galle"
     }
   ],
-  "sitePhone": "0761358200",
-  "siteEmail": "info@kktconstructions.lk",
-  "siteAddress": "No. 123, Galle Road, Colombo 03, Sri Lanka",
+  "sitePhone": "+94 76 135 8200",
+  "siteEmail": "kkthomessrilanka@gmail.com",
+  "siteAddress": "kkthomes, 656 Peradeniya Rd, Kandy 20000",
   "designPageHeroImage": "images/image-1773645063180-8175595.jpg",
   "contactPageHeroImage": "images/image-1773646090374-356897862.png",
   "sponsors": [
-    ""
+    "images/image-1774421571450-532678600.png",
+    "images/image-1774421577583-452092148.png",
+    "images/image-1774421582661-5246160.png",
+    "images/image-1774421589676-396360647.png",
+    "images/image-1774421597172-12774396.png"
   ],
   "whyChooseUs": {
     "title": "WHY CHOOSE US",
