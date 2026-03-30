@@ -67,29 +67,30 @@
 
                 <div class="contact-form-container"
                     style="background: white; padding: 3rem; border-radius: 12px; box-shadow: 0 15px 40px rgba(0,0,0,0.1);">
-                    <form id="contact-form">
+                    <form id="contact-form" action="https://formsubmit.co/kkthomessrilanka@gmail.com" method="POST">
+                        <input type="hidden" name="_captcha" value="false">
                         <div class="form-group" style="margin-bottom: 1.5rem;">
                             <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Full Name</label>
-                            <input type="text" placeholder="Your Name"
+                            <input type="text" name="name" placeholder="Your Name"
                                 style="width: 100%; padding: 1rem; border: 1px solid #ddd; border-radius: 4px; font-family: inherit;"
                                 required>
                         </div>
                         <div class="form-group" style="margin-bottom: 1.5rem;">
                             <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Email
                                 Address</label>
-                            <input type="email" placeholder="Your Email"
+                            <input type="email" name="email" placeholder="Your Email"
                                 style="width: 100%; padding: 1rem; border: 1px solid #ddd; border-radius: 4px; font-family: inherit;"
                                 required>
                         </div>
                         <div class="form-group" style="margin-bottom: 1.5rem;">
                             <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Subject</label>
-                            <input type="text" placeholder="How can we help?"
+                            <input type="text" name="_subject" placeholder="How can we help?"
                                 style="width: 100%; padding: 1rem; border: 1px solid #ddd; border-radius: 4px; font-family: inherit;"
                                 required>
                         </div>
                         <div class="form-group" style="margin-bottom: 2rem;">
                             <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Message</label>
-                            <textarea rows="5" placeholder="Your Message"
+                            <textarea name="message" rows="5" placeholder="Your Message"
                                 style="width: 100%; padding: 1rem; border: 1px solid #ddd; border-radius: 4px; font-family: inherit;"
                                 required></textarea>
                         </div>
