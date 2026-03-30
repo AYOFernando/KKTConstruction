@@ -45,6 +45,12 @@
                 <h2>Our <span class="bg-gold-text">Portfolio</span></h2>
                 <p>A showcase of our luxury developments and architectural planning.</p>
             </div>
+            
+            <div class="portfolio-filters">
+                <button class="btn btn-outline filter-btn active" onclick="filterDesigns('Exterior')">Exterior Designs</button>
+                <button class="btn btn-outline filter-btn" onclick="filterDesigns('Interior')">Interior Designs</button>
+            </div>
+
             <div class="designs-grid" id="dynamic-designs-container">
                 <!-- Design items will be injected here by JS -->
             </div>

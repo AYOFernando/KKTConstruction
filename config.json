@@ -176,6 +176,96 @@
       "img": "images/image-1774850458564-952933760.png",
       "title": "",
       "loc": ""
+    },
+    {
+      "img": "images/image-1774851415528-394716358.png",
+      "title": "",
+      "loc": "",
+      "category": "Interior"
+    },
+    {
+      "img": "images/image-1774852597554-773991861.png",
+      "title": "",
+      "loc": "",
+      "category": "Interior"
+    },
+    {
+      "img": "images/image-1774852673571-512742892.png",
+      "title": "",
+      "loc": "",
+      "category": "Interior"
+    },
+    {
+      "img": "images/image-1774852700228-354349390.png",
+      "title": "",
+      "loc": "",
+      "category": "Interior"
+    },
+    {
+      "img": "images/image-1774852725919-990246790.png",
+      "title": "",
+      "loc": "",
+      "category": "Exterior"
+    },
+    {
+      "img": "images/image-1774852787526-399715633.png",
+      "title": "",
+      "loc": "",
+      "category": "Interior"
+    },
+    {
+      "img": "images/image-1774852808164-721245425.png",
+      "title": "",
+      "loc": "",
+      "category": "Interior"
+    },
+    {
+      "img": "images/image-1774852841196-402992454.png",
+      "title": "",
+      "loc": "",
+      "category": "Interior"
+    },
+    {
+      "img": "images/image-1774852913543-342498604.png",
+      "title": "",
+      "loc": "",
+      "category": "Exterior"
+    },
+    {
+      "img": "images/image-1774852959271-262491876.png",
+      "title": "",
+      "loc": "",
+      "category": "Exterior"
+    },
+    {
+      "img": "images/image-1774852982365-951270449.png",
+      "title": "",
+      "loc": "",
+      "category": "Exterior"
+    },
+    {
+      "img": "images/image-1774853006498-931804582.png",
+      "title": "",
+      "loc": "",
+      "category": "Exterior"
+    },
+    {
+      "img": "images/image-1774853029282-164977099.png",
+      "title": "",
+      "loc": "",
+      "category": "Exterior"
+    },
+    {
+      "img": "images/image-1774853089178-664886407.png",
+      "title": "",
+      "loc": "",
+      "category": "Interior"
+    },
+    {
+      "img": "images/image-1774853146415-21338525.png",
+      "title": "",
+      "loc": "",
+      "category": "Interior"
     }
   ],
   "sitePhone": "+94 76 135 8200",
@@ -184,11 +274,7 @@
   "designPageHeroImage": "images/image-1773645063180-8175595.jpg",
   "contactPageHeroImage": "images/image-1773646090374-356897862.png",
   "sponsors": [
-    "images/image-1774421571450-532678600.png",
-    "images/image-1774847511040-215200858.png",
-    "images/image-1774847520184-207222214.png",
-    "images/image-1774847532101-838811020.png",
-    "images/image-1774847541245-309319934.png"
+    "images/image-1774421571450-532678600.png"
   ],
   "whyChooseUs": {
     "title": "WHY CHOOSE US",

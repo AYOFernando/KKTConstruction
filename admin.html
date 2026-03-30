@@ -449,9 +449,9 @@
                 ]
             },
             designs: [
-                { img: '', title: 'Modern Villa', loc: 'Colombo' },
-                { img: '', title: 'Luxury Apartment', loc: 'Kandy' },
-                { img: '', title: 'Beach House', loc: 'Galle' }
+                { img: '', title: 'Modern Villa', loc: 'Colombo', category: 'Exterior' },
+                { img: '', title: 'Luxury Apartment', loc: 'Kandy', category: 'Interior' },
+                { img: '', title: 'Beach House', loc: 'Galle', category: 'Exterior' }
             ]
         };
 
@@ -650,7 +650,7 @@
 
         function addDesignEntry() {
             siteConfig.designs = siteConfig.designs || [];
-            siteConfig.designs.push({ img: '', title: '', loc: '' });
+            siteConfig.designs.push({ img: '', title: '', loc: '', category: 'Exterior' });
             renderDesignUploadZones();
         }
 
@@ -706,6 +706,13 @@
                         <div class="form-group">
                             <label>Location (Optional)</label>
                             <input type="text" id="design-loc-${i}" value="${design.loc || ''}" placeholder="Colombo, Sri Lanka" oninput="updateDesignData(${i}, 'loc', this.value)">
+                        </div>
+                        <div class="form-group">
+                            <label>Design Category</label>
+                            <select id="design-cat-${i}" style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 4px; font-family: 'Inter', sans-serif;" onchange="updateDesignData(${i}, 'category', this.value)">
+                                <option value="Exterior" ${design.category === 'Exterior' || !design.category ? 'selected' : ''}>Exterior Designs</option>
+                                <option value="Interior" ${design.category === 'Interior' ? 'selected' : ''}>Interior Designs</option>
+                            </select>
                         </div>
                     `;
 

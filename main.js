@@ -310,7 +310,12 @@ function loadDynamicContent(config) {
 
     // Update Designs Page Grid
     if (config.designs && config.designs.length > 0) {
-        renderDesigns(config.designs);
+        window.designsData = config.designs; // Save globally for filtering
+        if (typeof filterDesigns === 'function' && document.querySelector('.portfolio-filters')) {
+            filterDesigns('Exterior'); // Default filter if on designs page
+        } else {
+            renderDesigns(config.designs);
+        }
     } else {
         // Default Designs if none configured
         const defaultDesigns = [
@@ -318,7 +323,12 @@ function loadDynamicContent(config) {
             { img: 'hero-bg.jpg', title: 'Luxury Apartment', loc: 'Kandy' },
             { img: 'hero-bg.jpg', title: 'Beach House', loc: 'Galle' }
         ];
-        renderDesigns(defaultDesigns);
+        window.designsData = defaultDesigns;
+        if (typeof filterDesigns === 'function' && document.querySelector('.portfolio-filters')) {
+            filterDesigns('Exterior');
+        } else {
+            renderDesigns(defaultDesigns);
+        }
     }
 
     // Update Contact Information (Global)
@@ -498,3 +508,27 @@ function closeLightbox() {
         document.body.style.overflow = 'auto'; // Restore scrolling
     }
 }
+
+// Filtering Functions
+function filterDesigns(category) {
+    if (!window.designsData) return;
+
+    // Filter by category (safely treating undefined/empty as Exterior)
+    const filtered = window.designsData.filter(d => {
+        const cat = d.category || 'Exterior';
+        return cat === category;
+    });
+
+    renderDesigns(filtered);
+
+    // Update active state of buttons
+    const buttons = document.querySelectorAll('.filter-btn');
+    buttons.forEach(btn => {
+        if (btn.innerText.includes(category)) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
+}
+

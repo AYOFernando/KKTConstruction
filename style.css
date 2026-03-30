@@ -1227,4 +1227,40 @@ nav {
 
 .lightbox-back-btn:hover {
     background: rgba(255, 255, 255, 0.4);
+}
+
+/* Portfolio Filters */
+.portfolio-filters {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.portfolio-filters .filter-btn {
+    border-radius: 30px;
+    padding: 0.8rem 2.5rem;
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.portfolio-filters .filter-btn.active {
+    background-color: var(--primary-red);
+    color: #ffffff;
+    border-color: var(--primary-red);
+}
+
+@media (max-width: 768px) {
+    .portfolio-filters {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    .portfolio-filters .filter-btn {
+        width: 100%;
+        max-width: 300px;
+    }
 }
