@@ -425,7 +425,7 @@ function renderDesigns(designs) {
         const item = document.createElement('div');
         item.className = 'design-item';
         item.innerHTML = `
-            <img src="${design.img || 'hero-bg.jpg'}" alt="${design.title}">
+            <img src="${design.img || 'hero-bg.jpg'}" alt="${design.title}" onclick="openLightbox(this.src)" style="cursor: pointer;">
             <div class="design-overlay">
                 <h3>${design.title}</h3>
                 <p><i class="fas fa-map-marker-alt" style="margin-right: 5px;"></i>${design.loc}</p>
@@ -479,3 +479,22 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+// Lightbox Functions
+function openLightbox(imgSrc) {
+    const lightbox = document.getElementById('image-lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    if (lightbox && lightboxImg) {
+        lightboxImg.src = imgSrc;
+        lightbox.style.display = 'flex';
+        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    }
+}
+
+function closeLightbox() {
+    const lightbox = document.getElementById('image-lightbox');
+    if (lightbox) {
+        lightbox.style.display = 'none';
+        document.body.style.overflow = 'auto'; // Restore scrolling
+    }
+}
